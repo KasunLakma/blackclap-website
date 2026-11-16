@@ -1,0 +1,52 @@
+---
+import Photo from './Photo.astro';
+import { home } from '../data/home.js';
+
+const f = home.featured;
+---
+
+<section class="featured">
+  <Photo
+    src={f.image}
+    alt={f.title}
+    shade="linear-gradient(90deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.35) 50%, transparent 100%)"
+  />
+
+  <div class="container inner">
+    <span class="eyebrow">Our Productions</span>
+    <h2>{f.title}</h2>
+    <p>{f.tagline}</p>
+    <a href={f.href} class="btn">View More <span>→</span></a>
+  </div>
+</section>
+
+<style>
+  .featured {
+    position: relative;
+    min-height: 420px;
+    display: flex;
+    align-items: center;
+    background: #000;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .inner {
+    position: relative;
+    z-index: 3;
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+
+  h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    color: var(--yellow);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  p {
+    font-size: 1.6rem;
+    margin-bottom: 26px;
+  }
+</style>

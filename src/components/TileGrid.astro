@@ -1,0 +1,103 @@
+---
+import Photo from './Photo.astro';
+import { home } from '../data/home.js';
+---
+
+<section class="tiles">
+  {home.tiles.map((tile) => (
+    <a href={tile.href} class="tile">
+      <Photo
+        src={tile.image}
+        alt={tile.title}
+        shade="linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.1) 70%)"
+      />
+      <div class="tile-text">
+        <h3>{tile.title}</h3>
+        <p>{tile.text}</p>
+      </div>
+      <span class="arrow">→</span>
+    </a>
+  ))}
+</section>
+
+<style>
+  .tiles {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background: #000;
+  }
+
+  .tile {
+    position: relative;
+    min-height: 240px;
+    display: flex;
+    align-items: flex-end;
+    padding: 28px;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+
+  .tile:last-child {
+    border-right: none;
+  }
+
+  .tile:hover h3 {
+    color: #fff;
+  }
+
+  .tile-text {
+    position: relative;
+    z-index: 3;
+  }
+
+  h3 {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    color: var(--yellow);
+    line-height: 1;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+  }
+
+  p {
+    font-style: italic;
+    font-size: 0.95rem;
+    margin-top: 6px;
+  }
+
+  .arrow {
+    position: absolute;
+    z-index: 3;
+    right: 24px;
+    bottom: 26px;
+    color: var(--yellow);
+    font-size: 1.4rem;
+    transition: transform 0.3s ease;
+  }
+
+  .tile:hover .arrow {
+    transform: translateX(6px);
+  }
+
+  @media (max-width: 1000px) {
+    .tiles {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .tile:nth-child(2) {
+      border-right: none;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .tiles {
+      grid-template-columns: 1fr;
+    }
+
+    .tile {
+      border-right: none;
+    }
+  }
+</style>

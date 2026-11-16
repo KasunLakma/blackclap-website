@@ -1,0 +1,174 @@
+---
+import { Icon } from 'astro-icon/components';
+import { site } from '../data/site.js';
+
+const path = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === '/' ? path === '/' : path.startsWith(href);
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="/" class="logo">
+      <span class="logo-main">{site.name}</span>
+      <span class="logo-sub">{site.subtitle}</span>
+    </a>
+
+    <nav class="nav" id="nav">
+      {site.nav.map((link) => (
+        <a
+          href={link.href}
+          class:list={['nav-link', { active: isActive(link.href) }]}
+        >
+          {link.name}
+        </a>
+      ))}
+    </nav>
+
+    <div class="socials">
+      {site.socials.map((s) => (
+        <a href={s.href} aria-label={s.name} target="_blank" rel="noopener">
+          <Icon name={s.icon} size={20} />
+        </a>
+      ))}
+    </div>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.92);
+    backdrop-filter: blur(10px);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    height: 90px;
+  }
+
+  .logo {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+  }
+
+  .logo-main {
+    font-family: var(--font-display);
+    font-size: 2.4rem;
+    color: var(--yellow);
+    letter-spacing: 1px;
+  }
+
+  .logo-sub {
+    font-family: var(--font-label);
+    font-weight: 500;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    color: var(--yellow);
+    margin-top: 2px;
+  }
+
+  .nav {
+    display: flex;
+    gap: 32px;
+  }
+
+  .nav-link {
+    font-family: var(--font-label);
+    font-weight: 500;
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 6px 0;
+    border-bottom: 2px solid transparent;
+    transition: all 0.25s ease;
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    color: var(--yellow);
+    border-bottom-color: var(--yellow);
+  }
+
+  .socials {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding-left: 24px;
+    border-left: 1px solid var(--line);
+  }
+
+  .socials a {
+    color: var(--yellow);
+    display: flex;
+    transition: transform 0.2s ease;
+  }
+
+  .socials a:hover {
+    transform: translateY(-2px);
+  }
+
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+  }
+
+  .menu-toggle span {
+    width: 26px;
+    height: 2px;
+    background: var(--yellow);
+  }
+
+  @media (max-width: 1100px) {
+    .socials {
+      display: none;
+    }
+
+    .menu-toggle {
+      display: flex;
+    }
+
+    .nav {
+      position: absolute;
+      top: 90px;
+      left: 0;
+      right: 0;
+      background: #000;
+      flex-direction: column;
+      gap: 0;
+      padding: 8px 28px 24px;
+      border-bottom: 1px solid var(--line);
+      display: none;
+    }
+
+    .nav.open {
+      display: flex;
+    }
+
+    .nav-link {
+      padding: 16px 0;
+      border-bottom: 1px solid #1a1a1a;
+    }
+  }
+</style>
+
+<script>
+  const toggle = document.getElementById('menuToggle');
+  const nav = document.getElementById('nav');
+  toggle?.addEventListener('click', () => nav?.classList.toggle('open'));
+</script>
