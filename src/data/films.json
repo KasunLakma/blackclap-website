@@ -1,0 +1,460 @@
+[
+    {
+        "slug": "6-plus-1-kmph",
+        "title": "6 + (1) kmph",
+        "year": 2024,
+        "category": "Short Film",
+        "tagline": "Inspired by a True Story",
+        "featured": true,
+        "poster": "",
+        "synopsis": "",
+        "video": "",
+        "gallery": [],
+        "note": "One of the company's most significant short film productions. The film has also been used as an educational reference by film educators when teaching filmmaking and cinema to students.",
+        "crew": [
+            {
+                "role": "Director, Screenwriter, Editor & Director of Photography",
+                "name": "Yasiru Sandaruwan Weerasinghe"
+            },
+            {
+                "role": "Assistant Director",
+                "name": "Sanjeewa Wewal Rala"
+            },
+            {
+                "role": "Production Manager",
+                "name": "Iresh Madusanka"
+            },
+            {
+                "role": "Production & Art Assistant",
+                "name": "Christy Damiyan"
+            },
+            {
+                "role": "Camera & Art Assistant",
+                "name": "Lasitha Dilshan"
+            },
+            {
+                "role": "Costume & Makeup Assistant",
+                "name": "Hiru WickramaArachchi"
+            },
+            {
+                "role": "Art Director / Makeup & Costume Designer",
+                "name": "Shashi Donpawulu"
+            }
+        ],
+        "cast": [
+            "Hiru WickramaArachchi",
+            "Christy Damiyan",
+            "Iresh Madusanka",
+            "Shashi Donpawulu",
+            "Sanjeewa Wewal Rala",
+            "Lasitha Dilshan"
+        ],
+        "specialThanks": [
+            "Dinesh Nalaka",
+            "Kasun Wadumestri",
+            "Asanka Maduranga Udaya Kumara",
+            "Daya Priyanthika",
+            "D.P.A. Sumanadasa",
+            "Oshan Dinanjaya",
+            "Rohana Sri Ranasinghe",
+            "Mayuri Kodikara"
+        ],
+        "awards": [
+            {
+                "title": "Best Short Film",
+                "festival": "Onscreen 25 Short Film Festival",
+                "year": 2025,
+                "type": "win"
+            },
+            {
+                "title": "Best Director",
+                "festival": "Onscreen 25 Short Film Festival",
+                "year": 2025,
+                "type": "win"
+            },
+            {
+                "title": "Best Screenwriter",
+                "festival": "Onscreen 25 Short Film Festival",
+                "year": 2025,
+                "type": "win"
+            },
+            {
+                "title": "Finalist",
+                "festival": "Agenda 14 Short Film Festival",
+                "year": 2025,
+                "type": "finalist"
+            },
+            {
+                "title": "Finalist",
+                "festival": "Third Act Short Film Festival",
+                "year": 2026,
+                "type": "finalist"
+            },
+            {
+                "title": "Screening",
+                "festival": "Out of the Frame Short Film Festival",
+                "year": 2026,
+                "type": "screening"
+            }
+        ]
+    },
+    {
+        "slug": "petle-of-lullaby",
+        "title": "PETLE OF LULLABY",
+        "year": 2026,
+        "category": "Short Film",
+        "tagline": "The Death of a Sleeping Sigh",
+        "featured": false,
+        "poster": "",
+        "synopsis": "",
+        "video": "",
+        "gallery": [],
+        "note": "A Short Film by Shashi Donpawulu",
+        "crew": [
+            {
+                "role": "Writer & Director",
+                "name": "Shashi Donpawulu"
+            },
+            {
+                "role": "Production Designer",
+                "name": "Yasiru Sandaruwan Weerasinghe"
+            },
+            {
+                "role": "Director of Photography",
+                "name": "Ruwa K Amarasinghe"
+            },
+            {
+                "role": "Assistant Director",
+                "name": "Christy Damiyan"
+            },
+            {
+                "role": "Production Manager",
+                "name": "Kasun Lakmal"
+            },
+            {
+                "role": "Art Assistant",
+                "name": "Isura Wewalrala"
+            },
+            {
+                "role": "Production Assistant",
+                "name": "Dilmi Fonseka"
+            },
+            {
+                "role": "Camera Assistant",
+                "name": "Roshini Bandara"
+            }
+        ],
+        "cast": [
+            "Sugath Jayaweera",
+            "Sachin Indranath",
+            "Shashi Donpawulu",
+            "Neelaka Bandara",
+            "Dinesh Nalaka",
+            "Isura Wewalrala",
+            "Ranjith Weerasinghe"
+        ],
+        "specialThanks": [],
+        "awards": [
+            {
+                "title": "Finalist",
+                "festival": "Third Act Short Film Festival",
+                "year": 2026,
+                "type": "finalist"
+            }
+        ]
+    },
+    {
+        "slug": "tomorrow",
+        "title": "TOMORROW",
+        "year": 2023,
+        "category": "Short Film",
+        "tagline": "",
+        "featured": false,
+        "poster": "",
+        "synopsis": "",
+        "video": "",
+        "gallery": [],
+        "note": "",
+        "crew": [
+            {
+                "role": "Scriptwriter, Cinematographer, Editor & Director",
+                "name": "Yasiru Sandaruwan Weerasinghe"
+            },
+            {
+                "role": "Assistant Director & Production Manager",
+                "name": "Isura Sanjeewa"
+            },
+            {
+                "role": "Art Director, Costume & Makeup",
+                "name": "Shashi Donpawulu"
+            }
+        ],
+        "cast": [
+            "Iresha Gayani Rathnayaka",
+            "Peshala Hettiarachchi",
+            "Nishsanka Rajapaksha"
+        ],
+        "specialThanks": [],
+        "awards": [
+            {
+                "title": "3rd Place, Best Short Film",
+                "festival": "WMS Short Film Festival",
+                "year": 2023,
+                "type": "win"
+            },
+            {
+                "title": "Best Short Film",
+                "festival": "Behala International Film Festival",
+                "year": 2023,
+                "type": "win"
+            }
+        ]
+    },
+    {
+        "slug": "patiloma",
+        "title": "PATILOMA",
+        "year": 2022,
+        "category": "Short Film",
+        "tagline": "",
+        "featured": false,
+        "poster": "",
+        "synopsis": "",
+        "video": "",
+        "gallery": [],
+        "note": "",
+        "crew": [
+            {
+                "role": "Director, Editor & Cinematographer",
+                "name": "Yasiru Sandaruwan Weerasinghe"
+            },
+            {
+                "role": "Writer",
+                "name": "Shashi Donpawulu"
+            },
+            {
+                "role": "Assistant Director",
+                "name": "Shashith Harshana"
+            },
+            {
+                "role": "Production Manager",
+                "name": "Dinith Ranushka"
+            }
+        ],
+        "cast": [
+            "Hiru Wickramaarachchi",
+            "Dilmi Fonseka"
+        ],
+        "specialThanks": [],
+        "awards": [
+            {
+                "title": "Best Film",
+                "festival": "Feel Free 2.0 Short Film Competition (University of Colombo)",
+                "year": 2023,
+                "type": "win"
+            },
+            {
+                "title": "Best Film Nomination",
+                "festival": "Abhimani Queer Film Festival",
+                "year": 2023,
+                "type": "nomination"
+            }
+        ]
+    },
+    {
+        "slug": "i-am-a-journalist",
+        "title": "I AM A JOURNALIST",
+        "year": 2022,
+        "category": "Short Film",
+        "tagline": "",
+        "featured": false,
+        "poster": "",
+        "synopsis": "",
+        "video": "",
+        "gallery": [],
+        "note": "This film was shot at the Galle Face protest site during Sri Lanka's Aragalaya movement, capturing a period of significant social and political change in the country.",
+        "crew": [
+            {
+                "role": "Director",
+                "name": "Yasiru Sandaruwan Weerasinghe"
+            },
+            {
+                "role": "Writer",
+                "name": "Shashi Donpawulu"
+            },
+            {
+                "role": "Art Director",
+                "name": "Kasun Jayasanka"
+            }
+        ],
+        "cast": [
+            "Isura Sanjeewa",
+            "Christy Burnad"
+        ],
+        "specialThanks": [],
+        "awards": []
+    },
+    {
+        "slug": "the-un-defeater",
+        "title": "THE UN-DEFEATER",
+        "year": 2021,
+        "category": "Short Film",
+        "tagline": "",
+        "featured": false,
+        "poster": "",
+        "synopsis": "",
+        "video": "",
+        "gallery": [],
+        "note": "",
+        "crew": [
+            {
+                "role": "Writer & Director",
+                "name": "Yasiru Sandaruwan Weerasinghe"
+            },
+            {
+                "role": "Cinematography & Editor",
+                "name": "Pragathi Sarartha Vithanage"
+            },
+            {
+                "role": "Production Crew",
+                "name": "Shehan Malith, Mohan Perera"
+            }
+        ],
+        "cast": [],
+        "specialThanks": [],
+        "awards": [
+            {
+                "title": "Best Film",
+                "festival": "Olympic Short Film Competition",
+                "year": 2021,
+                "type": "win"
+            }
+        ]
+    },
+    {
+        "slug": "21",
+        "title": "21",
+        "year": 2021,
+        "category": "Short Film",
+        "tagline": "",
+        "featured": false,
+        "poster": "",
+        "synopsis": "",
+        "video": "",
+        "gallery": [],
+        "note": "",
+        "crew": [
+            {
+                "role": "Writer & Director",
+                "name": "Yasiru Sandaruwan Weerasinghe"
+            },
+            {
+                "role": "Cinematography & Editor",
+                "name": "Pragathi Sarartha Vithanage"
+            },
+            {
+                "role": "Production Crew",
+                "name": "Shehan Malith, Mohan Perera, Themiya Dilhara"
+            }
+        ],
+        "cast": [
+            "Yasiru Sandaruwan Weerasinghe",
+            "Gimani Rupasinghe",
+            "Dehemi Sanjana"
+        ],
+        "specialThanks": [],
+        "awards": []
+    },
+    {
+        "slug": "the-thirst-for-death",
+        "title": "THE THIRST FOR DEATH",
+        "year": 2021,
+        "category": "Short Film",
+        "tagline": "",
+        "featured": false,
+        "poster": "",
+        "synopsis": "",
+        "video": "",
+        "gallery": [],
+        "note": "",
+        "crew": [
+            {
+                "role": "Writer & Director",
+                "name": "Yasiru Sandaruwan Weerasinghe"
+            },
+            {
+                "role": "Cinematography & Editor",
+                "name": "Pragathi Sarartha Vithanage"
+            },
+            {
+                "role": "Production Crew",
+                "name": "Shehan Malith, Mohan Perera, Themiya Dilhara"
+            }
+        ],
+        "cast": [],
+        "specialThanks": [],
+        "awards": []
+    },
+    {
+        "slug": "asammatha",
+        "title": "ASAMMATHA",
+        "year": 2020,
+        "category": "Short Film",
+        "tagline": "",
+        "featured": false,
+        "poster": "",
+        "synopsis": "",
+        "video": "",
+        "gallery": [],
+        "note": "",
+        "crew": [
+            {
+                "role": "Director",
+                "name": "Yasiru Sandaruwan Weerasinghe"
+            },
+            {
+                "role": "Editor",
+                "name": "Pragathi Sarartha Vithanage"
+            },
+            {
+                "role": "Cinematography",
+                "name": "Shehan Malith Dhananjaya"
+            }
+        ],
+        "cast": [
+            "Gimani Rupasinghe",
+            "Imesh Madushan"
+        ],
+        "specialThanks": [],
+        "awards": []
+    },
+    {
+        "slug": "gini-dum",
+        "title": "GINI DUM",
+        "year": 2020,
+        "category": "Short Film",
+        "tagline": "",
+        "featured": false,
+        "poster": "",
+        "synopsis": "",
+        "video": "",
+        "gallery": [],
+        "note": "",
+        "crew": [
+            {
+                "role": "Director & Writer",
+                "name": "Yasiru Sandaruwan Weerasinghe"
+            },
+            {
+                "role": "Editor",
+                "name": "Pragathi Sarartha Vithanage"
+            },
+            {
+                "role": "Cinematography",
+                "name": "Shehan Malith Dhananjaya"
+            }
+        ],
+        "cast": [],
+        "specialThanks": [],
+        "awards": []
+    }
+]

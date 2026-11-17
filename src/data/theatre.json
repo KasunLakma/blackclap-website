@@ -1,0 +1,189 @@
+[
+    {
+        "slug": "the-swing",
+        "title": "THE SWING",
+        "year": 2026,
+        "category": "English Physical Play / Monodrama",
+        "tagline": "A Journey Beyond Limits",
+        "featured": true,
+        "poster": "",
+        "synopsis": "",
+        "video": "",
+        "gallery": [],
+        "duration": "Adaptable from 15 to 42 minutes",
+        "note": "An English-language physical theatre production exploring themes through movement, performance and theatrical storytelling.",
+        "crew": [
+            {
+                "role": "Writer",
+                "name": "Shashi Donpawulu"
+            },
+            {
+                "role": "Director",
+                "name": "Yasiru Sandaruwan Weerasinghe"
+            }
+        ],
+        "cast": [
+            "Madara Peries"
+        ],
+        "awards": [
+            {
+                "title": "Best Director",
+                "festival": "Colombo International Theatre Festival",
+                "year": 2026,
+                "type": "win"
+            },
+            {
+                "title": "Best Actress",
+                "festival": "Colombo International Theatre Festival",
+                "year": 2026,
+                "type": "win"
+            },
+            {
+                "title": "Festival Participation",
+                "festival": "National Youth Theatre Festival",
+                "year": 2026,
+                "type": "participation"
+            }
+        ]
+    },
+    {
+        "slug": "some-magamayo",
+        "title": "SOME MAGAMAYO",
+        "year": 2025,
+        "category": "Sinhala Stage Drama",
+        "tagline": "",
+        "featured": false,
+        "poster": "",
+        "synopsis": "",
+        "video": "",
+        "gallery": [],
+        "duration": "",
+        "note": "",
+        "crew": [
+            {
+                "role": "Director / Playwright",
+                "name": "Shashi Donpawulu"
+            },
+            {
+                "role": "Set Designer / Stage Manager",
+                "name": "Yasiru Sandaruwan Weerasinghe"
+            },
+            {
+                "role": "Lighting",
+                "name": "Bhagya Ravishanka"
+            },
+            {
+                "role": "Music",
+                "name": "Shavinda Lakshan, Navinda Lakshan"
+            },
+            {
+                "role": "Costume Design",
+                "name": "Shashi Donpawulu"
+            },
+            {
+                "role": "Backstage",
+                "name": "Esadi Inupama"
+            }
+        ],
+        "cast": [
+            "Shashi Donpawulu",
+            "Anjana Premawardana"
+        ],
+        "awards": [
+            {
+                "title": "Second Round",
+                "festival": "Youth Drama Festival",
+                "year": null,
+                "type": "round"
+            },
+            {
+                "title": "Second Round",
+                "festival": "State Drama Festival",
+                "year": null,
+                "type": "round"
+            }
+        ]
+    },
+    {
+        "slug": "ahasin-wetena-gehenu",
+        "title": "AHASIN WETENA GEHENU",
+        "year": 2023,
+        "category": "Sinhala Stage Drama",
+        "tagline": "",
+        "featured": false,
+        "poster": "",
+        "synopsis": "",
+        "video": "",
+        "gallery": [],
+        "duration": "",
+        "note": "",
+        "crew": [
+            {
+                "role": "Director",
+                "name": "Yasiru Sandaruwan Weerasinghe"
+            },
+            {
+                "role": "Playwright",
+                "name": "Shashi Donpawulu"
+            },
+            {
+                "role": "Music",
+                "name": "Shavinda Lakshan, Navinda Lakshan"
+            }
+        ],
+        "cast": [
+            "Isura Sanjeewa",
+            "Shashi Donpawulu",
+            "Nishshanka Rajapaksha"
+        ],
+        "awards": [
+            {
+                "title": "Second Round",
+                "festival": "Youth Drama Festival",
+                "year": null,
+                "type": "round"
+            },
+            {
+                "title": "Second Round",
+                "festival": "State Drama Festival",
+                "year": null,
+                "type": "round"
+            }
+        ]
+    },
+    {
+        "slug": "the-bride",
+        "title": "THE BRIDE",
+        "year": 2021,
+        "category": "Sinhala Monodrama",
+        "tagline": "",
+        "featured": false,
+        "poster": "",
+        "synopsis": "",
+        "video": "",
+        "gallery": [],
+        "duration": "",
+        "note": "BLACKCLAP's first theatrical production, which marked the beginning of the company's theatre journey. The Colombo Mono Drama Festival 2021 was identified by the company as Sri Lanka's first mono drama festival.",
+        "crew": [
+            {
+                "role": "Director",
+                "name": "Yasiru Sandaruwan Weerasinghe"
+            },
+            {
+                "role": "Playwright",
+                "name": "Shashi Donpawulu"
+            }
+        ],
+        "cast": [
+            "Dilmi Fonseka"
+        ],
+        "awards": [
+            {
+                "title": "Finalist",
+                "festival": "Colombo Mono Drama Festival",
+                "year": 2021,
+                "type": "finalist"
+            }
+        ]
+    }
+]

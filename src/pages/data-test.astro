@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import {
+  allFilms,
+  allTheatre,
+  allAwards,
+  winsCount,
+  featuredFilm,
+  featuredPlay,
+} from '../data/content.js';
+---
+
+<BaseLayout title="Data test">
+  <div class="container wrap">
+    <h1>Data test</h1>
+    <p>Films: <strong>{allFilms.length}</strong> (expected 10)</p>
+    <p>Theatre: <strong>{allTheatre.length}</strong> (expected 4)</p>
+    <p>Total awards &amp; selections: <strong>{allAwards.length}</strong> (expected 19)</p>
+    <p>Wins: <strong>{winsCount}</strong></p>
+    <p>Featured film: <strong>{featuredFilm?.title}</strong></p>
+    <p>Featured play: <strong>{featuredPlay?.title}</strong></p>
+
+    <h2>All awards</h2>
+    <ul>
+      {allAwards.map((a) => (
+        <li>
+          [{a.kind}] {a.title} — {a.festival} {a.year ?? ''} — {a.production}
+        </li>
+      ))}
+    </ul>
+  </div>
+</BaseLayout>
+
+<style>
+  .wrap {
+    padding-top: 60px;
+    padding-bottom: 80px;
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    color: var(--yellow);
+    margin-bottom: 20px;
+  }
+  h2 {
+    font-family: var(--font-display);
+    color: var(--yellow);
+    margin: 30px 0 10px;
+  }
+  li {
+    margin-bottom: 6px;
+  }
+</style>
