@@ -1,8 +1,17 @@
 ---
-const { src = "", alt = "", shade = "none", position = "center" } = Astro.props;
+const {
+  src = "",
+  alt = "",
+  shade = "none",
+  position = "center",
+  duotone = false,
+} = Astro.props;
 ---
 
-<div class:list={["photo", { empty: !src }]} style={`--shade:${shade}`}>
+<div
+  class:list={["photo", { empty: !src, duotone }]}
+  style={`--shade:${shade}`}
+>
   {src && (
     <img
       src={src}
@@ -26,11 +35,14 @@ const { src = "", alt = "", shade = "none", position = "center" } = Astro.props;
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  /* duotone ඕනේ නම් විතරක් (duotone prop එක දුන්නොත්) */
+  .photo.duotone img {
     filter: grayscale(1) contrast(1.15) brightness(0.85);
   }
 
-  /* කහ පාට ආවරණය (duotone) */
-  .photo::before {
+  .photo.duotone::before {
     content: "";
     position: absolute;
     inset: 0;
@@ -40,7 +52,7 @@ const { src = "", alt = "", shade = "none", position = "center" } = Astro.props;
     opacity: 0.65;
   }
 
-  /* අකුරු පැහැදිලිව පෙනෙන්න අඳුරු gradient එකක් */
+  /* අකුරු පැහැදිලිව පෙනෙන්න අඳුරු gradient එක */
   .photo::after {
     content: "";
     position: absolute;
@@ -57,9 +69,5 @@ const { src = "", alt = "", shade = "none", position = "center" } = Astro.props;
       rgba(255, 212, 0, 0.1) 40%,
       #000 75%
     );
-  }
-
-  .photo.empty::before {
-    display: none;
   }
 </style>
