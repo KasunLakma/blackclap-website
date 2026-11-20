@@ -1,9 +1,16 @@
 ---
-const { src = '', alt = '', shade = 'none' } = Astro.props;
+const { src = "", alt = "", shade = "none", position = "center" } = Astro.props;
 ---
 
-<div class:list={['photo', { empty: !src }]} style={`--shade:${shade}`}>
-  {src && <img src={src} alt={alt} loading="lazy" />}
+<div class:list={["photo", { empty: !src }]} style={`--shade:${shade}`}>
+  {src && (
+    <img
+      src={src}
+      alt={alt}
+      loading="lazy"
+      style={`object-position:${position}`}
+    />
+  )}
 </div>
 
 <style>
@@ -24,7 +31,7 @@ const { src = '', alt = '', shade = 'none' } = Astro.props;
 
   /* කහ පාට ආවරණය (duotone) */
   .photo::before {
-    content: '';
+    content: "";
     position: absolute;
     inset: 0;
     z-index: 1;
@@ -35,7 +42,7 @@ const { src = '', alt = '', shade = 'none' } = Astro.props;
 
   /* අකුරු පැහැදිලිව පෙනෙන්න අඳුරු gradient එකක් */
   .photo::after {
-    content: '';
+    content: "";
     position: absolute;
     inset: 0;
     z-index: 2;
@@ -44,8 +51,12 @@ const { src = '', alt = '', shade = 'none' } = Astro.props;
 
   /* ඡායාරූපය නැති වෙලාවට පෙනෙන glow එක */
   .photo.empty {
-    background:
-      radial-gradient(circle at 70% 45%, rgba(255, 212, 0, 0.5), rgba(255, 212, 0, 0.1) 40%, #000 75%);
+    background: radial-gradient(
+      circle at 70% 45%,
+      rgba(255, 212, 0, 0.5),
+      rgba(255, 212, 0, 0.1) 40%,
+      #000 75%
+    );
   }
 
   .photo.empty::before {

@@ -1,6 +1,6 @@
 ---
-import Photo from './Photo.astro';
-import { home } from '../data/home.js';
+import Photo from "./Photo.astro";
+import { home } from "../data/home.js";
 ---
 
 <section class="tiles">
@@ -8,6 +8,7 @@ import { home } from '../data/home.js';
     <a href={tile.href} class="tile">
       <Photo
         src={tile.image}
+        position={tile.position}
         alt={tile.title}
         shade="linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.1) 70%)"
       />

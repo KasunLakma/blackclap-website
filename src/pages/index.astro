@@ -1,16 +1,23 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import AboutSection from '../components/AboutSection.astro';
-import FeaturedProduction from '../components/FeaturedProduction.astro';
-import TileGrid from '../components/TileGrid.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import AboutSection from "../components/AboutSection.astro";
+import FeaturedProduction from "../components/FeaturedProduction.astro";
+import TileGrid from "../components/TileGrid.astro";
 ---
 
 <BaseLayout title="BLACKCLAP Theatre Productions | Stage • Film • Beyond">
   <section class="hero">
-    <div class="sun"></div>
+    <div class="hero-media">
+      <img
+        src="/images/the-swing-02.jpg"
+        alt="The Swing – a BLACKCLAP theatre production"
+      />
+    </div>
 
     <div class="container hero-inner">
-      <p class="kicker">Stage <i>•</i> Film <i>•</i> Beyond</p>
+      <p class="kicker">
+        Stage <i>•</i> Film <i>•</i> Beyond
+      </p>
 
       <h1>BLACKCLAP</h1>
       <h2>Theatre Productions</h2>
@@ -18,17 +25,19 @@ import TileGrid from '../components/TileGrid.astro';
       <span class="rule"></span>
 
       <p class="tagline">
-        Stories that move.<br />
+        Stories that move.
+        <br />
         Performances that live.
       </p>
 
-      <a href="/about" class="btn">Explore Our Journey <span>→</span></a>
+      <a href="/about" class="btn">
+        Explore Our Journey <span>→</span>
+      </a>
     </div>
   </section>
-    <AboutSection />
+  <AboutSection />
   <FeaturedProduction />
   <TileGrid />
-
 </BaseLayout>
 
 <style>
@@ -50,12 +59,53 @@ import TileGrid from '../components/TileGrid.astro';
     aspect-ratio: 1;
     border-radius: 50%;
     background:
-      radial-gradient(circle at 30% 30%, rgba(0, 0, 0, 0.25) 0 2%, transparent 3%),
-      radial-gradient(circle at 70% 60%, rgba(0, 0, 0, 0.2) 0 1.5%, transparent 2.5%),
+      radial-gradient(
+        circle at 30% 30%,
+        rgba(0, 0, 0, 0.25) 0 2%,
+        transparent 3%
+      ),
+      radial-gradient(
+        circle at 70% 60%,
+        rgba(0, 0, 0, 0.2) 0 1.5%,
+        transparent 2.5%
+      ),
       var(--yellow);
     box-shadow: 0 0 120px rgba(255, 212, 0, 0.25);
   }
+  .hero-media {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(60vw, 860px);
+    isolation: isolate;
+    -webkit-mask-image: linear-gradient(to left, #000 60%, transparent 100%);
+    mask-image: linear-gradient(to left, #000 60%, transparent 100%);
+  }
 
+  .hero-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+    filter: grayscale(1) contrast(1.2) brightness(0.95);
+  }
+
+  .hero-media::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: var(--yellow);
+    mix-blend-mode: multiply;
+  }
+
+  @media (max-width: 800px) {
+    .hero-media {
+      width: 100%;
+      opacity: 0.35;
+    }
+  }
   .hero-inner {
     position: relative;
     z-index: 2;

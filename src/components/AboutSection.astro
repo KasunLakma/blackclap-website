@@ -1,6 +1,6 @@
 ---
-import Photo from './Photo.astro';
-import { home } from '../data/home.js';
+import Photo from "./Photo.astro";
+import { home } from "../data/home.js";
 
 const about = home.about;
 ---
@@ -9,6 +9,7 @@ const about = home.about;
   <div class="media">
     <Photo
       src={about.image}
+      position={about.position}
       alt="BLACKCLAP stage performance"
       shade="linear-gradient(90deg, transparent 60%, #000 100%)"
     />

@@ -6,10 +6,21 @@
         "category": "English Physical Play / Monodrama",
         "tagline": "A Journey Beyond Limits",
         "featured": true,
-        "poster": "",
+        "poster": "/images/the-swing-03.jpg",
         "synopsis": "",
         "video": "",
-        "gallery": [],
+        "gallery": [
+            "/images/the-swing-05.jpg",
+            "/images/the-swing-09.jpg",
+            "/images/the-swing-04.jpg",
+            "/images/the-swing-08.jpg",
+            "/images/the-swing-01.jpg",
+            "/images/the-swing-07.jpg",
+            "/images/the-swing-06.jpg",
+            "/images/the-swing-02.jpg",
+            "/images/the-swing-03.jpg",
+            "/images/the-swing-10.jpg"
+        ],
         "duration": "Adaptable from 15 to 42 minutes",
         "note": "An English-language physical theatre production exploring themes through movement, performance and theatrical storytelling.",
         "crew": [
