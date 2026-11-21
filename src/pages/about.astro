@@ -1,0 +1,188 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import AboutNav from '../components/AboutNav.astro';
+import { company } from '../data/company.js';
+import { allFilms, allTheatre, winsCount } from '../data/content.js';
+
+const stats = [
+  { value: company.established, label: 'Established' },
+  { value: allFilms.length, label: 'Short Films' },
+  { value: allTheatre.length, label: 'Theatre Productions' },
+  { value: winsCount, label: 'Awards Won' },
+];
+---
+
+<BaseLayout
+  title="About Us | BLACKCLAP Film & Theatre Productions"
+  description="BLACKCLAP is a creative production company based in Kurunegala, Sri Lanka, working across film, theatre and performing arts."
+>
+  <PageHero
+    eyebrow="About Us"
+    title="Who We Are"
+    text="A creative production company working across film, theatre and performing arts."
+  />
+  <AboutNav />
+
+  <section class="section">
+    <div class="container grid">
+      <div class="text">
+        {company.about.map((p, i) => (
+          <p class:list={[{ lead: i === 0 }]}>{p}</p>
+        ))}
+      </div>
+
+      <div class="stats">
+        {stats.map((s) => (
+          <div class="stat">
+            <strong>{s.value}</strong>
+            <span>{s.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {(company.vision || company.mission) && (
+    <section class="section alt">
+      <div class="container vm">
+        {company.vision && (
+          <div>
+            <span class="eyebrow">Our Vision</span>
+            <p>{company.vision}</p>
+          </div>
+        )}
+        {company.mission && (
+          <div>
+            <span class="eyebrow">Our Mission</span>
+            <p>{company.mission}</p>
+          </div>
+        )}
+      </div>
+    </section>
+  )}
+
+  <section class="section links">
+    <div class="container cards">
+      <a href="/history" class="card"><span>01</span><h3>Company History</h3><p>From BLACKCLAP STUDIO in 2020 to today.</p></a>
+      <a href="/services" class="card"><span>02</span><h3>Our Services</h3><p>Film, theatre, design and workshops.</p></a>
+      <a href="/founder" class="card"><span>03</span><h3>Founder Profile</h3><p>Yasiru Sandaruwan Weerasinghe.</p></a>
+      <a href="/team" class="card"><span>04</span><h3>Our Team</h3><p>The creative minds behind BLACKCLAP.</p></a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 70px;
+    align-items: start;
+  }
+
+  .text p {
+    color: #e2e2e2;
+    margin-bottom: 20px;
+    max-width: 680px;
+  }
+
+  .text p.lead {
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+    line-height: 1.4;
+    color: #fff;
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid var(--line);
+  }
+
+  .stat {
+    padding: 34px 24px;
+    border: 1px solid var(--line);
+    margin: -1px 0 0 -1px;
+  }
+
+  .stat strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 3.6rem;
+    line-height: 1;
+    color: var(--yellow);
+  }
+
+  .stat span {
+    font-family: var(--font-label);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+
+  .alt {
+    background: var(--bg-soft);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .vm {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+  }
+
+  .vm p {
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 18px;
+  }
+
+  .card {
+    display: block;
+    padding: 28px 24px;
+    border: 1px solid var(--line);
+    transition: all 0.3s ease;
+  }
+
+  .card:hover {
+    border-color: var(--yellow);
+    transform: translateY(-5px);
+  }
+
+  .card span {
+    font-family: var(--font-label);
+    color: var(--yellow);
+    letter-spacing: 2px;
+  }
+
+  .card h3 {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    margin: 8px 0 6px;
+    color: #fff;
+  }
+
+  .card:hover h3 {
+    color: var(--yellow);
+  }
+
+  .card p {
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 900px) {
+    .grid,
+    .vm {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+  }
+</style>

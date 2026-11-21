@@ -1,0 +1,53 @@
+---
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+
+const links = [
+  { name: 'About', href: '/about' },
+  { name: 'History', href: '/history' },
+  { name: 'Services', href: '/services' },
+  { name: 'Founder', href: '/founder' },
+  { name: 'Our Team', href: '/team' },
+];
+---
+
+<nav class="subnav" aria-label="About sections">
+  <div class="container inner">
+    {links.map((l) => (
+      <a href={l.href} class:list={[{ active: path === l.href }]}>{l.name}</a>
+    ))}
+  </div>
+</nav>
+
+<style>
+  .subnav {
+    background: #050505;
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 90px;
+    z-index: 50;
+  }
+
+  .inner {
+    display: flex;
+    gap: 34px;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  a {
+    padding: 16px 0;
+    font-family: var(--font-label);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.82rem;
+    color: var(--muted);
+    border-bottom: 2px solid transparent;
+    transition: all 0.25s ease;
+  }
+
+  a:hover,
+  a.active {
+    color: var(--yellow);
+    border-bottom-color: var(--yellow);
+  }
+</style>

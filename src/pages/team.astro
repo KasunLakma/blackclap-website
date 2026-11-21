@@ -1,0 +1,220 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import AboutNav from '../components/AboutNav.astro';
+import { company } from '../data/company.js';
+import { allFilms, allTheatre } from '../data/content.js';
+
+const founder = company.founder;
+const members = company.team;
+
+// Films සහ plays වල credits වලින්, productions 2ක හෝ වැඩි ගණනක සිටින අය ඉබේම එකතු කරනවා
+const people = new Map();
+
+const add = (rawName, item) => {
+  const name = (rawName || '').trim();
+  if (!name || name.includes(',')) return;
+  const key = name.toLowerCase();
+  if (!people.has(key)) people.set(key, { name, slugs: new Set() });
+  people.get(key).slugs.add(item.slug);
+};
+
+[...allFilms, ...allTheatre].forEach((item) => {
+  (item.crew || []).forEach((c) => add(c.name, item));
+  (item.cast || []).forEach((n) => add(n, item));
+});
+
+const skip = [founder.name, ...members.map((m) => m.name)].map((n) => n.toLowerCase());
+
+const collaborators = [...people.values()]
+  .filter((p) => p.slugs.size >= 2 && !skip.includes(p.name.toLowerCase()))
+  .sort((a, b) => b.slugs.size - a.slugs.size || a.name.localeCompare(b.name));
+
+const initials = (name) =>
+  name
+    .split(' ')
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((w) => w[0])
+    .join('')
+    .toUpperCase();
+---
+
+<BaseLayout
+  title="Our Team | BLACKCLAP Film & Theatre Productions"
+  description="The creative team behind BLACKCLAP Film & Theatre Productions."
+>
+  <PageHero
+    eyebrow="Our Team"
+    title="Creative Minds"
+    text="The artists and collaborators behind BLACKCLAP's films and stage productions."
+  />
+  <AboutNav />
+
+  <section class="section">
+    <div class="container">
+      <span class="eyebrow">Leadership</span>
+      <div class="people">
+        <a href="/founder" class="person">
+          <div class="avatar">
+            {founder.photo ? <img src={founder.photo} alt={founder.name} /> : <span>{founder.initials}</span>}
+          </div>
+          <h3>{founder.name}</h3>
+          <p class="role">Founder · Director · Actor · Playwright · Art Director</p>
+        </a>
+
+        {members.map((m) => (
+          <div class="person">
+            <div class="avatar">
+              {m.photo ? <img src={m.photo} alt={m.name} /> : <span>{m.initials}</span>}
+            </div>
+            <h3>{m.name}</h3>
+            <p class="role">{m.role}</p>
+            {m.bio && <p class="bio">{m.bio}</p>}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {collaborators.length > 0 && (
+    <section class="section alt">
+      <div class="container">
+        <span class="eyebrow">Creative Collaborators</span>
+        <p class="intro">Artists and crew who have worked with BLACKCLAP on more than one production.</p>
+        <ul class="collab">
+          {collaborators.map((p) => (
+            <li>
+              <span class="mini">{initials(p.name)}</span>
+              <div>
+                <strong>{p.name}</strong>
+                <span>{p.slugs.size} productions</span>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+</BaseLayout>
+
+<style>
+  .people {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 26px;
+    margin-top: 14px;
+  }
+
+  .person {
+    display: block;
+    border: 1px solid var(--line);
+    padding: 22px;
+    transition: all 0.3s ease;
+  }
+
+  a.person:hover {
+    border-color: var(--yellow);
+    transform: translateY(-5px);
+  }
+
+  .avatar {
+    aspect-ratio: 1;
+    margin-bottom: 18px;
+    border: 1px solid var(--line);
+    background:
+      radial-gradient(circle at 70% 25%, rgba(255, 212, 0, 0.22), transparent 60%),
+      #0a0a0a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .avatar span {
+    font-family: var(--font-display);
+    font-size: 5rem;
+    color: var(--yellow);
+  }
+
+  h3 {
+    font-family: var(--font-display);
+    font-size: 1.9rem;
+    line-height: 1;
+    color: #fff;
+  }
+
+  .role {
+    font-family: var(--font-label);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 0.78rem;
+    color: var(--yellow);
+    margin-top: 8px;
+  }
+
+  .bio {
+    color: #d5d5d5;
+    margin-top: 12px;
+    font-size: 0.98rem;
+  }
+
+  .alt {
+    background: var(--bg-soft);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .intro {
+    color: var(--muted);
+    margin: 6px 0 26px;
+    max-width: 620px;
+  }
+
+  .collab {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 14px;
+  }
+
+  .collab li {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 16px;
+    border: 1px solid var(--line);
+    background: #000;
+  }
+
+  .mini {
+    flex: none;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: 1px solid var(--yellow);
+    color: var(--yellow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-label);
+    letter-spacing: 1px;
+  }
+
+  .collab strong {
+    display: block;
+    color: #fff;
+    line-height: 1.2;
+  }
+
+  .collab div span {
+    color: var(--muted);
+    font-size: 0.88rem;
+  }
+</style>

@@ -3,8 +3,10 @@ import { Icon } from "astro-icon/components";
 import { site } from "../data/site.js";
 
 const path = Astro.url.pathname;
-const isActive = (href: string) =>
-  href === "/" ? path === "/" : path.startsWith(href);
+const isActive = (link: { href: string; also?: string[] }) =>
+  link.href === "/"
+    ? path === "/"
+    : [link.href, ...(link.also || [])].some((h) => path.startsWith(h));
 ---
 
 <header class="site-header">
@@ -18,7 +20,7 @@ const isActive = (href: string) =>
       {site.nav.map((link) => (
         <a
           href={link.href}
-          class:list={["nav-link", { active: isActive(link.href) }]}
+          class:list={["nav-link", { active: isActive(link) }]}
         >
           {link.name}
         </a>

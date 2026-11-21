@@ -1,0 +1,170 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import AboutNav from '../components/AboutNav.astro';
+import { company } from '../data/company.js';
+import { allFilms, allTheatre } from '../data/content.js';
+
+const f = company.founder;
+const has = (item) => (item.crew || []).some((c) => c.name.includes(f.name));
+
+const filmCredits = allFilms.filter(has).map((x) => ({ ...x, base: '/films' }));
+const theatreCredits = allTheatre.filter(has).map((x) => ({ ...x, base: '/theatre' }));
+---
+
+<BaseLayout
+  title="Founder Profile | BLACKCLAP Film & Theatre Productions"
+  description={f.bio[0]}
+>
+  <PageHero eyebrow="Founder Profile" title={f.name} text={f.title} />
+  <AboutNav />
+
+  <section class="section">
+    <div class="container grid">
+      <div class="portrait">
+        {f.photo ? (
+          <img src={f.photo} alt={f.name} />
+        ) : (
+          <span class="initials">{f.initials}</span>
+        )}
+      </div>
+
+      <div class="text">
+        {f.bio.map((p, i) => (
+          <p class:list={[{ lead: i === 0 }]}>{p}</p>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {(filmCredits.length > 0 || theatreCredits.length > 0) && (
+    <section class="section alt">
+      <div class="container credits">
+        {theatreCredits.length > 0 && (
+          <div>
+            <span class="eyebrow">Theatre Credits</span>
+            <ul>
+              {theatreCredits.map((p) => (
+                <li>
+                  <a href={`${p.base}/${p.slug}`}>
+                    <strong>{p.title}</strong>
+                    <span>{p.year}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {filmCredits.length > 0 && (
+          <div>
+            <span class="eyebrow">Film Credits</span>
+            <ul>
+              {filmCredits.map((p) => (
+                <li>
+                  <a href={`${p.base}/${p.slug}`}>
+                    <strong>{p.title}</strong>
+                    <span>{p.year}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+    </section>
+  )}
+</BaseLayout>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  .portrait {
+    aspect-ratio: 4 / 5;
+    border: 1px solid var(--line);
+    background:
+      radial-gradient(circle at 70% 25%, rgba(255, 212, 0, 0.25), transparent 60%),
+      #0a0a0a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .initials {
+    font-family: var(--font-display);
+    font-size: 9rem;
+    color: var(--yellow);
+  }
+
+  .text p {
+    color: #e2e2e2;
+    margin-bottom: 20px;
+    max-width: 680px;
+  }
+
+  .text p.lead {
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+    line-height: 1.4;
+    color: #fff;
+  }
+
+  .alt {
+    background: var(--bg-soft);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .credits {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  li a {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid #1d1d1d;
+    transition: all 0.2s ease;
+  }
+
+  li a:hover strong {
+    color: var(--yellow);
+  }
+
+  li a span {
+    color: var(--muted);
+    font-family: var(--font-label);
+    letter-spacing: 1px;
+  }
+
+  @media (max-width: 900px) {
+    .grid,
+    .credits {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .portrait {
+      max-width: 340px;
+    }
+  }
+</style>

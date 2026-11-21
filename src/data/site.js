@@ -7,7 +7,7 @@ export const site = {
 
     nav: [
         { name: 'Home', href: '/' },
-        { name: 'About', href: '/about' },
+        { name: 'About', href: '/about', also: ['/history', '/services', '/founder'] },
         { name: 'Productions', href: '/theatre' },
         { name: 'Film & Creative', href: '/films' },
         { name: 'Awards', href: '/awards' },

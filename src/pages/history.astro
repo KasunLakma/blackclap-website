@@ -1,0 +1,130 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import AboutNav from '../components/AboutNav.astro';
+import { company } from '../data/company.js';
+---
+
+<BaseLayout
+  title="Company History | BLACKCLAP Film & Theatre Productions"
+  description="The history of BLACKCLAP, from BLACKCLAP STUDIO in 2020 to a growing film and theatre production company."
+>
+  <PageHero
+    eyebrow="Company History"
+    title="Our Journey"
+    text="From a creative studio in 2020 to a film and theatre production company."
+  />
+  <AboutNav />
+
+  <section class="section">
+    <div class="container">
+      <ol class="timeline">
+        {company.history.map((item) => (
+          <li>
+            <div class="year">{item.year}</div>
+            <div class="body">
+              <h2>{item.title}</h2>
+              <p>{item.text}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .timeline {
+    list-style: none;
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 200px;
+    top: 8px;
+    bottom: 8px;
+    width: 1px;
+    background: var(--line);
+  }
+
+  li {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 0;
+    padding-bottom: 54px;
+    position: relative;
+  }
+
+  li:last-child {
+    padding-bottom: 0;
+  }
+
+  .year {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    line-height: 1;
+    color: var(--yellow);
+    padding-right: 40px;
+    text-align: right;
+  }
+
+  .body {
+    padding-left: 40px;
+    position: relative;
+  }
+
+  .body::before {
+    content: '';
+    position: absolute;
+    left: -6px;
+    top: 14px;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--yellow);
+    box-shadow: 0 0 0 5px rgba(255, 212, 0, 0.18);
+  }
+
+  h2 {
+    font-family: var(--font-serif);
+    font-size: 1.7rem;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+
+  p {
+    color: #d8d8d8;
+    max-width: 560px;
+  }
+
+  @media (max-width: 700px) {
+    .timeline::before {
+      left: 5px;
+    }
+
+    li {
+      grid-template-columns: 1fr;
+      padding-left: 34px;
+    }
+
+    .year {
+      text-align: left;
+      padding: 0;
+      font-size: 2.4rem;
+    }
+
+    .body {
+      padding-left: 0;
+      margin-top: 6px;
+    }
+
+    .body::before {
+      left: -34px;
+      top: -34px;
+    }
+  }
+</style>

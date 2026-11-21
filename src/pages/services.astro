@@ -1,0 +1,124 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import AboutNav from '../components/AboutNav.astro';
+import { company } from '../data/company.js';
+---
+
+<BaseLayout
+  title="Our Services | BLACKCLAP Film & Theatre Productions"
+  description="Film and theatre production, direction, scriptwriting, design and workshops from BLACKCLAP in Sri Lanka."
+>
+  <PageHero
+    eyebrow="Our Services"
+    title="What We Do"
+    text="Professional creative services across film, theatre and performing arts."
+  />
+  <AboutNav />
+
+  <section class="section">
+    <div class="container grid">
+      {company.services.map((s, i) => (
+        <article class="service">
+          <span class="num">{String(i + 1).padStart(2, '0')}</span>
+          <h2>{s.title}</h2>
+          <p>{s.text}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="container inner">
+      <div>
+        <span class="eyebrow">Work With Us</span>
+        <h2>Let's create together.</h2>
+      </div>
+      <a href="/contact" class="btn">Contact Us <span>→</span></a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 0;
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+  }
+
+  .service {
+    padding: 34px 28px 38px;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    transition: background 0.3s ease;
+  }
+
+  .service:hover {
+    background: #0d0d0d;
+  }
+
+  .num {
+    font-family: var(--font-label);
+    color: var(--yellow);
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+  }
+
+  .service h2 {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    line-height: 1;
+    color: #fff;
+    margin: 10px 0 10px;
+  }
+
+  .service:hover h2 {
+    color: var(--yellow);
+  }
+
+  .service p {
+    color: var(--muted);
+    font-size: 0.98rem;
+  }
+
+  .cta {
+    background: var(--yellow);
+    color: #000;
+  }
+
+  .inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    padding-top: 56px;
+    padding-bottom: 56px;
+  }
+
+  .cta .eyebrow {
+    color: #000;
+  }
+
+  .cta .eyebrow::after {
+    background: #000;
+  }
+
+  .cta h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    line-height: 1;
+  }
+
+  .cta .btn {
+    border-color: #000;
+    color: #000;
+  }
+
+  .cta .btn:hover {
+    background: #000;
+    color: var(--yellow);
+  }
+</style>
