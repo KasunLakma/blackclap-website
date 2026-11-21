@@ -2,7 +2,7 @@ export const home = {
     about: {
         image: '/images/the-swing-04.jpg',
         position: '50% 80%',
-        heading: 'A Theatre Company with a <em>Bold Vision</em>',
+        heading: 'A Film &amp; Theatre Company with a <em>Bold Vision</em>',
         text: 'BLACKCLAP is a Sri Lankan creative production company that brings human stories to life through powerful performances, creative collaborations and fearless storytelling across theatre, film and performing arts.',
         motto: 'Drama. Film. Culture. Always.',
     },

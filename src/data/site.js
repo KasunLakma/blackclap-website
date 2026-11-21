@@ -1,7 +1,7 @@
 export const site = {
     name: 'BLACKCLAP',
-    subtitle: 'THEATRE PRODUCTIONS',
-    fullName: 'BLACKCLAP Theatre Productions',
+    subtitle: 'FILM & THEATRE PRODUCTIONS',
+    fullName: 'BLACKCLAP Film & Theatre Productions',
     location: 'Kurunegala, Sri Lanka',
     established: 2020,
 

@@ -1,6 +1,6 @@
 ---
-import { Icon } from 'astro-icon/components';
-import { site } from '../data/site.js';
+import { Icon } from "astro-icon/components";
+import { site } from "../data/site.js";
 
 const year = new Date().getFullYear();
 ---
@@ -12,20 +12,31 @@ const year = new Date().getFullYear();
       <span class="b-sub">{site.subtitle}</span>
     </a>
 
-    <p class="motto">Create <i>•</i> Perform <i>•</i> Inspire</p>
+    <p class="motto">
+      Create <i>•</i> Perform <i>•</i> Inspire
+    </p>
 
     <form class="newsletter" action="#">
       <label for="email">Join Our Creative Journey</label>
       <div class="field">
-        <input id="email" type="email" placeholder="Your Email Address" required />
-        <button type="submit" aria-label="Subscribe">→</button>
+        <input
+          id="email"
+          type="email"
+          placeholder="Your Email Address"
+          required
+        />
+        <button type="submit" aria-label="Subscribe">
+          →
+        </button>
       </div>
     </form>
   </div>
 
   <div class="footer-bottom">
     <div class="container bottom-inner">
-      <p>© {year} {site.fullName}. All Rights Reserved.</p>
+      <p>
+        © {year} {site.fullName}. All Rights Reserved.
+      </p>
       <div class="socials">
         {site.socials.map((s) => (
           <a href={s.href} aria-label={s.name} target="_blank" rel="noopener">
@@ -63,14 +74,16 @@ const year = new Date().getFullYear();
 
   .b-main {
     font-family: var(--font-display);
-    font-size: 2.8rem;
+    font-size: 3.2rem;
   }
 
   .b-sub {
     font-family: var(--font-label);
     font-weight: 600;
-    font-size: 0.8rem;
-    letter-spacing: 2px;
+    font-size: 0.66rem;
+    letter-spacing: 1.5px;
+    white-space: nowrap;
+    text-align-last: justify;
   }
 
   .motto {
