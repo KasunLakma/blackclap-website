@@ -1,0 +1,30 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ProjectDetail from "../../components/ProjectDetail.astro";
+import { allTheatre } from "../../data/content.js";
+
+export function getStaticPaths() {
+    return allTheatre.map((play) => ({
+        params: { slug: play.slug },
+        props: { play },
+    }));
+}
+
+const { play } = Astro.props;
+const description =
+    play.synopsis ||
+    play.note ||
+    `${play.title} (${play.year}), a ${play.category.toLowerCase()} by BLACKCLAP Theatre Productions.`;
+---
+
+<BaseLayout
+    title={`${play.title} (${play.year}) | BLACKCLAP`}
+    description={description}
+>
+    <ProjectDetail
+        item={play}
+        kind="Theatre"
+        backHref="/theatre"
+        backLabel="All Productions"
+    />
+</BaseLayout>

@@ -1,0 +1,407 @@
+---
+import Photo from './Photo.astro';
+import { toEmbed } from '../data/video.js';
+
+const { item, kind = 'Film', backHref, backLabel } = Astro.props;
+
+const embed = toEmbed(item.video);
+const crew = item.crew || [];
+const cast = item.cast || [];
+const thanks = item.specialThanks || [];
+const awards = item.awards || [];
+const gallery = item.gallery || [];
+
+const typeLabel = {
+  win: 'Winner',
+  finalist: 'Finalist',
+  nomination: 'Nominee',
+  screening: 'Screening',
+  round: 'Selected',
+  participation: 'Participant',
+};
+---
+
+<section class="top">
+  <div class="container top-grid">
+    <div class="poster">
+      <Photo
+        src={item.poster}
+        alt={item.title}
+        shade="linear-gradient(0deg, rgba(0,0,0,0.6), transparent 50%)"
+      />
+      {!item.poster && <span class="ph">{item.title}</span>}
+    </div>
+
+    <div class="summary">
+      <a href={backHref} class="back">← {backLabel}</a>
+      <span class="eyebrow">{kind} · {item.year}</span>
+      <h1>{item.title}</h1>
+      {item.tagline && <p class="tagline">{item.tagline}</p>}
+
+      <ul class="meta">
+        <li><span>Category</span>{item.category}</li>
+        <li><span>Year</span>{item.year}</li>
+        {item.duration && <li><span>Duration</span>{item.duration}</li>}
+      </ul>
+
+      {item.synopsis && (
+        <div class="block">
+          <h2>Synopsis</h2>
+          <p>{item.synopsis}</p>
+        </div>
+      )}
+
+      {item.note && (
+        <div class="block note">
+          <p>{item.note}</p>
+        </div>
+      )}
+    </div>
+  </div>
+</section>
+
+{embed && (
+  <section class="section">
+    <div class="container">
+      <span class="eyebrow">Watch</span>
+      <div class="video">
+        <iframe
+          src={embed}
+          title={`${item.title} video`}
+          loading="lazy"
+          allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+  </section>
+)}
+
+{awards.length > 0 && (
+  <section class="section alt">
+    <div class="container">
+      <span class="eyebrow">Awards &amp; Festival Selections</span>
+      <ul class="awards">
+        {awards.map((a) => (
+          <li class:list={[{ win: a.type === 'win' }]}>
+            <span class="badge">{a.type === 'win' ? '★ ' : ''}{typeLabel[a.type] || 'Selected'}</span>
+            <div>
+              <strong>{a.title}</strong>
+              <span>{a.festival}{a.year ? ` ${a.year}` : ''}</span>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+)}
+
+{(crew.length > 0 || cast.length > 0) && (
+  <section class="section">
+    <div class="container credits">
+      {crew.length > 0 && (
+        <div>
+          <span class="eyebrow">Creative Team</span>
+          <dl>
+            {crew.map((c) => (
+              <>
+                <dt>{c.role}</dt>
+                <dd>{c.name}</dd>
+              </>
+            ))}
+          </dl>
+        </div>
+      )}
+
+      {cast.length > 0 && (
+        <div>
+          <span class="eyebrow">Cast</span>
+          <ul class="list">
+            {cast.map((name) => <li>{name}</li>)}
+          </ul>
+
+          {thanks.length > 0 && (
+            <>
+              <span class="eyebrow gap">Special Thanks</span>
+              <p class="thanks">{thanks.join(' · ')}</p>
+            </>
+          )}
+        </div>
+      )}
+    </div>
+  </section>
+)}
+
+{gallery.length > 0 && (
+  <section class="section alt">
+    <div class="container">
+      <span class="eyebrow">Production Photographs</span>
+      <div class="gallery">
+        {gallery.map((src) => (
+          <img src={src} alt={`${item.title} production photograph`} loading="lazy" />
+        ))}
+      </div>
+    </div>
+  </section>
+)}
+
+<style>
+  .top {
+    padding: 70px 0 80px;
+    background:
+      radial-gradient(circle at 90% 10%, rgba(255, 212, 0, 0.12), transparent 50%),
+      #000;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .top-grid {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 56px;
+    align-items: start;
+  }
+
+  .poster {
+    position: relative;
+    aspect-ratio: 2 / 3;
+    border: 1px solid var(--line);
+    overflow: hidden;
+  }
+
+  .ph {
+    position: absolute;
+    z-index: 3;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 24px;
+    font-family: var(--font-display);
+    font-size: 3rem;
+    color: var(--yellow);
+    line-height: 1;
+  }
+
+  .back {
+    display: inline-block;
+    margin-bottom: 26px;
+    font-family: var(--font-label);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    color: var(--muted);
+    transition: color 0.2s;
+  }
+
+  .back:hover {
+    color: var(--yellow);
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 8vw, 6rem);
+    color: var(--yellow);
+    line-height: 0.95;
+  }
+
+  .tagline {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    margin-top: 14px;
+  }
+
+  .meta {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 40px;
+    margin: 28px 0;
+    padding: 18px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .meta li {
+    display: flex;
+    flex-direction: column;
+    font-size: 1rem;
+  }
+
+  .meta li span {
+    font-family: var(--font-label);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.72rem;
+    color: var(--yellow);
+  }
+
+  .block {
+    margin-top: 24px;
+    max-width: 680px;
+  }
+
+  .block h2 {
+    font-family: var(--font-label);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 0.9rem;
+    color: var(--yellow);
+    margin-bottom: 8px;
+  }
+
+  .block p {
+    color: #e6e6e6;
+  }
+
+  .note {
+    border-left: 3px solid var(--yellow);
+    padding-left: 18px;
+  }
+
+  .section {
+    padding: 70px 0;
+  }
+
+  .alt {
+    background: var(--bg-soft);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .video {
+    margin-top: 10px;
+    aspect-ratio: 16 / 9;
+    border: 1px solid var(--line);
+    background: #000;
+  }
+
+  .video iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  .awards {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 14px;
+    margin-top: 10px;
+  }
+
+  .awards li {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    padding: 16px 18px;
+    border: 1px solid var(--line);
+    background: #000;
+  }
+
+  .awards li.win {
+    border-color: var(--yellow);
+  }
+
+  .badge {
+    flex: none;
+    min-width: 92px;
+    text-align: center;
+    font-family: var(--font-label);
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 6px 8px;
+    border: 1px solid var(--yellow);
+    color: var(--yellow);
+  }
+
+  .awards li.win .badge {
+    background: var(--yellow);
+    color: #000;
+    font-weight: 600;
+  }
+
+  .awards strong {
+    display: block;
+    color: #fff;
+  }
+
+  .awards span:not(.badge) {
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+
+  .credits {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 60px;
+  }
+
+  dl {
+    margin-top: 10px;
+  }
+
+  dt {
+    font-family: var(--font-label);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 0.78rem;
+    color: var(--yellow);
+    margin-top: 16px;
+  }
+
+  dd {
+    font-size: 1.05rem;
+  }
+
+  .list {
+    list-style: none;
+    margin-top: 10px;
+  }
+
+  .list li {
+    padding: 8px 0;
+    border-bottom: 1px solid #1c1c1c;
+  }
+
+  .gap {
+    margin-top: 36px;
+  }
+
+  .thanks {
+    color: var(--muted);
+    margin-top: 6px;
+  }
+
+  /* ඡායාරූප ඒවායේ මුල් හැඩයෙන් (portrait / landscape) */
+  .gallery {
+    columns: 3 260px;
+    column-gap: 14px;
+    margin-top: 10px;
+  }
+
+  .gallery img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 14px;
+    break-inside: avoid;
+    border: 1px solid var(--line);
+  }
+
+  @media (max-width: 900px) {
+    .top-grid {
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+
+    .poster {
+      max-width: 320px;
+    }
+
+    .credits {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+  }
+</style>

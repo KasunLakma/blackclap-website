@@ -1,0 +1,107 @@
+---
+import Photo from './Photo.astro';
+
+const { item, base } = Astro.props;
+const wins = (item.awards || []).filter((a) => a.type === 'win').length;
+---
+
+<a href={`${base}/${item.slug}`} class="card">
+  <div class="poster">
+    <Photo
+      src={item.poster}
+      alt={item.title}
+      shade="linear-gradient(0deg, rgba(0,0,0,0.85), transparent 55%)"
+    />
+    {!item.poster && <span class="ph">{item.title}</span>}
+    <span class="year">{item.year}</span>
+    {wins > 0 && <span class="wins">★ {wins} {wins === 1 ? 'Award' : 'Awards'}</span>}
+  </div>
+
+  <div class="info">
+    <h3>{item.title}</h3>
+    <p>{item.category}</p>
+  </div>
+</a>
+
+<style>
+  .card {
+    display: block;
+    border: 1px solid var(--line);
+    background: #080808;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-6px);
+    border-color: var(--yellow);
+  }
+
+  .poster {
+    position: relative;
+    aspect-ratio: 2 / 3;
+    overflow: hidden;
+  }
+
+  .ph {
+    position: absolute;
+    z-index: 3;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    color: var(--yellow);
+    line-height: 1;
+  }
+
+  .year,
+  .wins {
+    position: absolute;
+    z-index: 4;
+    font-family: var(--font-label);
+    font-size: 0.78rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+  }
+
+  .year {
+    top: 12px;
+    left: 12px;
+    background: var(--yellow);
+    color: #000;
+    font-weight: 600;
+  }
+
+  .wins {
+    bottom: 12px;
+    left: 12px;
+    border: 1px solid var(--yellow);
+    color: var(--yellow);
+    background: rgba(0, 0, 0, 0.7);
+  }
+
+  .info {
+    padding: 16px 18px 20px;
+  }
+
+  h3 {
+    font-family: var(--font-display);
+    font-size: 1.7rem;
+    line-height: 1;
+    color: #fff;
+  }
+
+  .card:hover h3 {
+    color: var(--yellow);
+  }
+
+  p {
+    margin-top: 6px;
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+</style>

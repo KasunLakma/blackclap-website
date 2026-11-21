@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectDetail from '../../components/ProjectDetail.astro';
+import { allFilms } from '../../data/content.js';
+
+export function getStaticPaths() {
+  return allFilms.map((film) => ({
+    params: { slug: film.slug },
+    props: { film },
+  }));
+}
+
+const { film } = Astro.props;
+const description =
+  film.synopsis ||
+  film.note ||
+  `${film.title} (${film.year}), a ${film.category.toLowerCase()} by BLACKCLAP.`;
+---
+
+<BaseLayout title={`${film.title} (${film.year}) | BLACKCLAP`} description={description}>
+  <ProjectDetail item={film} kind="Film" backHref="/films" backLabel="All Films" />
+</BaseLayout>

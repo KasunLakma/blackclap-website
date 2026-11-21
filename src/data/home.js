@@ -10,7 +10,7 @@ export const home = {
     featured: {
         title: 'The Swing',
         tagline: 'A Journey Beyond Limits',
-        href: '/theatre',
+        href: '/theatre/the-swing',
         image: '/images/the-swing-09.jpg',
         position: 'center',
     },
