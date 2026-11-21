@@ -1,0 +1,100 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import news from '../../data/news.json';
+
+export function getStaticPaths() {
+  return news.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+---
+
+<BaseLayout title={`${post.title} | BLACKCLAP`} description={post.summary}>
+  <article>
+    <header class="head">
+      <div class="container narrow">
+        <a href="/news" class="back">← All News</a>
+        <p class="meta">{post.category} · {post.date}</p>
+        <h1>{post.title}</h1>
+      </div>
+    </header>
+
+    <div class="container narrow content">
+      {post.image && <img src={post.image} alt={post.title} class="cover" />}
+
+      {post.body.map((p) => <p>{p}</p>)}
+
+      {post.link && (
+        <a href={post.link} class="btn">View Production <span>→</span></a>
+      )}
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .head {
+    padding: 80px 0 50px;
+    border-bottom: 1px solid var(--line);
+    background:
+      radial-gradient(circle at 85% 20%, rgba(255, 212, 0, 0.14), transparent 55%),
+      #000;
+  }
+
+  .narrow {
+    max-width: 860px;
+  }
+
+  .back {
+    display: inline-block;
+    margin-bottom: 24px;
+    font-family: var(--font-label);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .back:hover {
+    color: var(--yellow);
+  }
+
+  .meta {
+    font-family: var(--font-label);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.85rem;
+    color: var(--yellow);
+    margin-bottom: 10px;
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.6rem, 7vw, 5rem);
+    line-height: 1;
+    color: #fff;
+  }
+
+  .content {
+    padding-top: 50px;
+    padding-bottom: 90px;
+  }
+
+  .cover {
+    width: 100%;
+    margin-bottom: 36px;
+    border: 1px solid var(--line);
+  }
+
+  .content p {
+    font-size: 1.15rem;
+    color: #e2e2e2;
+    margin-bottom: 22px;
+  }
+
+  .content .btn {
+    margin-top: 14px;
+  }
+</style>

@@ -34,9 +34,17 @@ const year = new Date().getFullYear();
 
   <div class="footer-bottom">
     <div class="container bottom-inner">
-      <p>
-        © {year} {site.fullName}. All Rights Reserved.
-      </p>
+      <div class="legal">
+        <p>
+          © {year} {site.fullName}. All Rights Reserved.
+        </p>
+        <nav class="flinks">
+          <a href="/gallery">Gallery</a>
+          <a href="/news">News</a>
+          <a href="/services">Services</a>
+          <a href="/contact">Contact</a>
+        </nav>
+      </div>
       <div class="socials">
         {site.socials.map((s) => (
           <a href={s.href} aria-label={s.name} target="_blank" rel="noopener">
@@ -166,5 +174,28 @@ const year = new Date().getFullYear();
     .newsletter {
       padding: 0 28px;
     }
+  }
+  .legal {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .flinks {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .flinks a {
+    font-family: var(--font-label);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 0.78rem;
+    color: var(--yellow);
+  }
+
+  .flinks a:hover {
+    color: #fff;
   }
 </style>

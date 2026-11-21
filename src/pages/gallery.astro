@@ -1,0 +1,290 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { allFilms, allTheatre } from '../data/content.js';
+
+const photos = [
+  ...allTheatre.map((p) => ({ ...p, kind: 'Theatre' })),
+  ...allFilms.map((f) => ({ ...f, kind: 'Film' })),
+].flatMap((item) =>
+  (item.gallery || []).map((src) => ({
+    src,
+    title: item.title,
+    kind: item.kind,
+  }))
+);
+
+const productions = [...new Set(photos.map((p) => p.title))];
+---
+
+<BaseLayout
+  title="Gallery | BLACKCLAP Film & Theatre Productions"
+  description="Production photographs from BLACKCLAP films and theatre productions."
+>
+  <PageHero
+    eyebrow="Gallery"
+    title="On Stage & On Set"
+    text="Production photographs from our theatre and film work."
+  />
+
+  <section class="section">
+    <div class="container">
+      {photos.length === 0 && (
+        <p class="empty">Production photographs will be added here soon.</p>
+      )}
+
+      {photos.length > 0 && (
+        <>
+          <div class="filters" id="filters">
+            <button class="chip active" data-filter="all">All</button>
+            {productions.map((name) => (
+              <button class="chip" data-filter={name}>{name}</button>
+            ))}
+          </div>
+
+          <div class="gallery" id="gallery">
+            {photos.map((p) => (
+              <button class="g-item" data-title={p.title} data-kind={p.kind} data-src={p.src}>
+                <img src={p.src} alt={`${p.title} photograph`} loading="lazy" />
+                <span>{p.title}</span>
+              </button>
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  </section>
+
+  <dialog id="lightbox">
+    <button class="lb-close" aria-label="Close">×</button>
+    <button class="lb-nav prev" aria-label="Previous">‹</button>
+    <figure>
+      <img id="lb-img" alt="" />
+      <figcaption id="lb-cap"></figcaption>
+    </figure>
+    <button class="lb-nav next" aria-label="Next">›</button>
+  </dialog>
+</BaseLayout>
+
+<style>
+  .empty {
+    color: var(--muted);
+    font-size: 1.2rem;
+    padding: 60px 0;
+    text-align: center;
+  }
+
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 30px;
+  }
+
+  .chip {
+    background: transparent;
+    border: 1px solid var(--line);
+    color: #fff;
+    padding: 9px 18px;
+    font-family: var(--font-label);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .chip:hover,
+  .chip.active {
+    background: var(--yellow);
+    border-color: var(--yellow);
+    color: #000;
+  }
+
+  .gallery {
+    columns: 3 280px;
+    column-gap: 14px;
+  }
+
+  .g-item {
+    position: relative;
+    display: block;
+    width: 100%;
+    margin: 0 0 14px;
+    padding: 0;
+    border: 1px solid var(--line);
+    background: #000;
+    cursor: zoom-in;
+    break-inside: avoid;
+    overflow: hidden;
+  }
+
+  .g-item[hidden] {
+    display: none;
+  }
+
+  .g-item img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.5s ease;
+  }
+
+  .g-item:hover img {
+    transform: scale(1.04);
+  }
+
+  .g-item span {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 30px 14px 12px;
+    text-align: left;
+    font-family: var(--font-label);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 0.78rem;
+    color: var(--yellow);
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.85), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .g-item:hover span {
+    opacity: 1;
+  }
+
+  dialog {
+    border: none;
+    padding: 0;
+    background: transparent;
+    max-width: 100vw;
+    max-height: 100vh;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  dialog[open] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  dialog::backdrop {
+    background: rgba(0, 0, 0, 0.94);
+  }
+
+  figure {
+    max-width: 88vw;
+    max-height: 88vh;
+    text-align: center;
+  }
+
+  figure img {
+    max-width: 88vw;
+    max-height: 80vh;
+    object-fit: contain;
+    border: 1px solid var(--line);
+  }
+
+  figcaption {
+    margin-top: 12px;
+    font-family: var(--font-label);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.85rem;
+    color: var(--yellow);
+  }
+
+  .lb-close,
+  .lb-nav {
+    position: absolute;
+    background: transparent;
+    border: 1px solid var(--yellow);
+    color: var(--yellow);
+    cursor: pointer;
+    font-size: 2rem;
+    line-height: 1;
+    width: 52px;
+    height: 52px;
+    transition: all 0.2s ease;
+  }
+
+  .lb-close:hover,
+  .lb-nav:hover {
+    background: var(--yellow);
+    color: #000;
+  }
+
+  .lb-close {
+    top: 24px;
+    right: 24px;
+  }
+
+  .lb-nav {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .prev {
+    left: 24px;
+  }
+
+  .next {
+    right: 24px;
+  }
+</style>
+
+<script>
+  const items = Array.from(document.querySelectorAll<HTMLElement>('.g-item'));
+  const chips = Array.from(document.querySelectorAll<HTMLElement>('.chip'));
+  const box = document.getElementById('lightbox') as HTMLDialogElement | null;
+  const img = document.getElementById('lb-img') as HTMLImageElement | null;
+  const cap = document.getElementById('lb-cap');
+
+  let visible: HTMLElement[] = items;
+  let index = 0;
+
+  chips.forEach((chip) => {
+    chip.addEventListener('click', () => {
+      chips.forEach((c) => c.classList.remove('active'));
+      chip.classList.add('active');
+      const f = chip.dataset.filter;
+      items.forEach((el) => {
+        el.hidden = !(f === 'all' || el.dataset.title === f);
+      });
+      visible = items.filter((el) => !el.hidden);
+    });
+  });
+
+  function show(i: number) {
+    if (!visible.length || !img || !cap) return;
+    index = (i + visible.length) % visible.length;
+    const el = visible[index];
+    img.src = el.dataset.src || '';
+    img.alt = `${el.dataset.title} photograph`;
+    cap.textContent = `${el.dataset.title} · ${el.dataset.kind}`;
+  }
+
+  items.forEach((el) => {
+    el.addEventListener('click', () => {
+      visible = items.filter((x) => !x.hidden);
+      show(visible.indexOf(el));
+      box?.showModal();
+    });
+  });
+
+  box?.querySelector('.lb-close')?.addEventListener('click', () => box.close());
+  box?.querySelector('.prev')?.addEventListener('click', () => show(index - 1));
+  box?.querySelector('.next')?.addEventListener('click', () => show(index + 1));
+
+  box?.addEventListener('click', (e) => {
+    if (e.target === box) box.close();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (!box?.open) return;
+    if (e.key === 'ArrowLeft') show(index - 1);
+    if (e.key === 'ArrowRight') show(index + 1);
+  });
+</script>

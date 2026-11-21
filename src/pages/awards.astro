@@ -1,0 +1,240 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { allAwards, winsCount } from '../data/content.js';
+
+const typeLabel = {
+  finalist: 'Finalist',
+  nomination: 'Nominee',
+  screening: 'Screening',
+  round: 'Selected',
+  participation: 'Participant',
+};
+
+const byYear = (a, b) => (b.year ?? 0) - (a.year ?? 0);
+const wins = allAwards.filter((a) => a.type === 'win').sort(byYear);
+const selections = allAwards.filter((a) => a.type !== 'win').sort(byYear);
+const festivals = new Set(allAwards.map((a) => a.festival)).size;
+
+const link = (a) => `/${a.kind === 'film' ? 'films' : 'theatre'}/${a.slug}`;
+
+const stats = [
+  { value: winsCount, label: 'Awards Won' },
+  { value: allAwards.length, label: 'Awards & Selections' },
+  { value: festivals, label: 'Festivals' },
+];
+---
+
+<BaseLayout
+  title="Awards & Achievements | BLACKCLAP Film & Theatre Productions"
+  description="Awards and festival selections for BLACKCLAP films and theatre productions."
+>
+  <PageHero
+    eyebrow="Awards & Achievements"
+    title="Recognition"
+    text="Awards and festival selections for our films and stage productions."
+  />
+
+  <section class="stats">
+    <div class="container row">
+      {stats.map((s) => (
+        <div class="stat">
+          <strong>{s.value}</strong>
+          <span>{s.label}</span>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <span class="eyebrow">Awards Won</span>
+      <div class="wins">
+        {wins.map((a) => (
+          <a href={link(a)} class="win">
+            <span class="star">★</span>
+            <h3>{a.title}</h3>
+            <p class="fest">{a.festival}{a.year ? ` ${a.year}` : ''}</p>
+            <p class="prod"><span>{a.kind === 'film' ? 'Film' : 'Theatre'}</span>{a.production}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="container">
+      <span class="eyebrow">Festival Selections</span>
+      <ul class="list">
+        {selections.map((a) => (
+          <li>
+            <span class="badge">{typeLabel[a.type] || 'Selected'}</span>
+            <div class="info">
+              <strong>{a.title !== typeLabel[a.type] ? a.title : a.festival}</strong>
+              <span>{a.title !== typeLabel[a.type] ? a.festival : ''}{a.year ? ` ${a.year}` : ''}</span>
+            </div>
+            <a href={link(a)} class="proj">{a.production} →</a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .stats {
+    border-bottom: 1px solid var(--line);
+    background: #050505;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .stat {
+    padding: 34px 24px;
+    border-right: 1px solid var(--line);
+  }
+
+  .stat:last-child {
+    border-right: none;
+  }
+
+  .stat strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 4rem;
+    line-height: 1;
+    color: var(--yellow);
+  }
+
+  .stat span {
+    font-family: var(--font-label);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  .wins {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 18px;
+    margin-top: 14px;
+  }
+
+  .win {
+    display: block;
+    padding: 28px 26px;
+    border: 1px solid var(--yellow);
+    background: linear-gradient(160deg, rgba(255, 212, 0, 0.1), #000 55%);
+    transition: transform 0.3s ease;
+  }
+
+  .win:hover {
+    transform: translateY(-5px);
+  }
+
+  .star {
+    color: var(--yellow);
+    font-size: 1.5rem;
+  }
+
+  .win h3 {
+    font-family: var(--font-display);
+    font-size: 2.3rem;
+    line-height: 1;
+    color: #fff;
+    margin: 8px 0;
+  }
+
+  .fest {
+    color: #d7d7d7;
+  }
+
+  .prod {
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+    font-family: var(--font-label);
+    letter-spacing: 1px;
+    color: var(--yellow);
+    text-transform: uppercase;
+    font-size: 0.85rem;
+  }
+
+  .prod span {
+    color: var(--muted);
+    margin-right: 10px;
+  }
+
+  .alt {
+    background: var(--bg-soft);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .list {
+    list-style: none;
+    margin-top: 10px;
+  }
+
+  .list li {
+    display: grid;
+    grid-template-columns: 130px 1fr auto;
+    align-items: center;
+    gap: 20px;
+    padding: 16px 0;
+    border-bottom: 1px solid #1c1c1c;
+  }
+
+  .badge {
+    text-align: center;
+    font-family: var(--font-label);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 0.75rem;
+    padding: 6px 8px;
+    border: 1px solid var(--yellow);
+    color: var(--yellow);
+  }
+
+  .info strong {
+    display: block;
+    color: #fff;
+  }
+
+  .info span {
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+
+  .proj {
+    font-family: var(--font-label);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 0.82rem;
+    color: var(--yellow);
+  }
+
+  .proj:hover {
+    color: #fff;
+  }
+
+  @media (max-width: 760px) {
+    .list li {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+
+    .badge {
+      justify-self: start;
+    }
+
+    .stat {
+      border-right: none;
+      border-bottom: 1px solid var(--line);
+    }
+  }
+</style>
