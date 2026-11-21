@@ -2,10 +2,11 @@
 import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import WhatsAppButton from "../components/WhatsAppButton.astro";
 
 const {
   title = "BLACKCLAP Film & Theatre Productions",
-  description = "A Sri Lankan creative production company working across theatre, film and performing arts.",
+  description = "A Sri Lankan creative production company working across film, theatre and performing arts.",
 } = Astro.props;
 ---
 
@@ -30,5 +31,6 @@ const {
       <slot />
     </main>
     <Footer />
+    <WhatsAppButton />
   </body>
 </html>

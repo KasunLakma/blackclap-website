@@ -1,0 +1,45 @@
+---
+import { Icon } from 'astro-icon/components';
+import { site } from '../data/site.js';
+
+const link = site.whatsapp
+  ? `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(
+      'Hello BLACKCLAP, I would like to know more about your work.'
+    )}`
+  : '';
+---
+
+{link && (
+  <a
+    href={link}
+    class="wa"
+    target="_blank"
+    rel="noopener"
+    aria-label="Chat with us on WhatsApp"
+  >
+    <Icon name="simple-icons:whatsapp" size={28} />
+  </a>
+)}
+
+<style>
+  .wa {
+    position: fixed;
+    right: 22px;
+    bottom: 22px;
+    z-index: 90;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: var(--yellow);
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.55), 0 0 0 4px rgba(255, 212, 0, 0.18);
+    transition: transform 0.25s ease;
+  }
+
+  .wa:hover {
+    transform: scale(1.1);
+  }
+</style>

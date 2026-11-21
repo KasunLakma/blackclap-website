@@ -3,6 +3,7 @@ import { Icon } from "astro-icon/components";
 import { site } from "../data/site.js";
 
 const year = new Date().getFullYear();
+const accessKey = site.web3formsKey;
 ---
 
 <footer class="site-footer">
@@ -16,11 +17,26 @@ const year = new Date().getFullYear();
       Create <i>•</i> Perform <i>•</i> Inspire
     </p>
 
-    <form class="newsletter" action="#">
+    <form class="newsletter" id="newsletterForm">
+      <input type="hidden" name="access_key" value={accessKey} />
+      <input
+        type="hidden"
+        name="subject"
+        value="New subscriber from BLACKCLAP website"
+      />
+      <input type="hidden" name="from_name" value="BLACKCLAP Website" />
+      <input
+        type="checkbox"
+        name="botcheck"
+        class="hp"
+        tabindex="-1"
+        autocomplete="off"
+      />
       <label for="email">Join Our Creative Journey</label>
       <div class="field">
         <input
           id="email"
+          name="email"
           type="email"
           placeholder="Your Email Address"
           required
@@ -29,6 +45,7 @@ const year = new Date().getFullYear();
           →
         </button>
       </div>
+      <p class="nl-msg" id="nlMsg" role="status"></p>
     </form>
   </div>
 
@@ -198,4 +215,56 @@ const year = new Date().getFullYear();
   .flinks a:hover {
     color: #fff;
   }
+  .hp {
+    display: none;
+  }
+
+  .nl-msg {
+    min-height: 1.4em;
+    margin-top: 6px;
+    font-size: 0.85rem;
+    color: var(--yellow);
+  }
 </style>
+<script>
+  const form = document.getElementById(
+    "newsletterForm",
+  ) as HTMLFormElement | null;
+  const msg = document.getElementById("nlMsg");
+
+  form?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (!msg) return;
+
+    const data = new FormData(form);
+    const key = String(data.get("access_key") || "");
+
+    if (!key || key.startsWith("YOUR_")) {
+      msg.textContent = "This form is not active yet.";
+      return;
+    }
+
+    msg.textContent = "Sending…";
+
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(Object.fromEntries(data)),
+      });
+      const json = await res.json();
+
+      if (json.success) {
+        msg.textContent = "Thank you for joining!";
+        form.reset();
+      } else {
+        msg.textContent = "Something went wrong. Please try again.";
+      }
+    } catch {
+      msg.textContent = "Network error. Please try again.";
+    }
+  });
+</script>

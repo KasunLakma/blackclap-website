@@ -1,0 +1,302 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { Icon } from 'astro-icon/components';
+import { site } from '../data/site.js';
+
+const socials = site.socials.filter((s) => s.href && s.href !== '#');
+
+const waLink = site.whatsapp
+  ? `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(
+      'Hello BLACKCLAP, I would like to know more about your work.'
+    )}`
+  : '';
+
+const info = [
+  site.email && { label: 'Email', value: site.email, href: `mailto:${site.email}` },
+  site.phone && { label: 'Phone', value: site.phone, href: `tel:${site.phone.replace(/\s/g, '')}` },
+  site.whatsapp && { label: 'WhatsApp', value: `+${site.whatsapp}`, href: waLink },
+  { label: 'Location', value: site.address || site.location, href: '' },
+].filter(Boolean);
+
+const topics = [
+  'Film collaboration',
+  'Theatre production / booking',
+  'Workshops',
+  'Services enquiry',
+  'Festival / media enquiry',
+  'Other',
+];
+---
+
+<BaseLayout
+  title="Contact Us | BLACKCLAP Film & Theatre Productions"
+  description="Get in touch with BLACKCLAP Film & Theatre Productions for collaborations, productions, workshops and enquiries."
+>
+  <PageHero
+    eyebrow="Contact"
+    title="Let's Create Together"
+    text="For collaborations, productions, workshops and enquiries, send us a message."
+  />
+
+  <section class="section">
+    <div class="container grid">
+      <div class="info">
+        <span class="eyebrow">Get in touch</span>
+
+        <ul class="details">
+          {info.map((i) => (
+            <li>
+              <span class="lbl">{i.label}</span>
+              {i.href ? (
+                <a href={i.href} target={i.label === 'WhatsApp' ? '_blank' : undefined} rel="noopener">{i.value}</a>
+              ) : (
+                <p>{i.value}</p>
+              )}
+            </li>
+          ))}
+        </ul>
+
+        {waLink && (
+          <a href={waLink} class="btn" target="_blank" rel="noopener">
+            Chat on WhatsApp <span>→</span>
+          </a>
+        )}
+
+        {socials.length > 0 && (
+          <div class="socials">
+            <span class="lbl">Follow us</span>
+            <div class="icons">
+              {socials.map((s) => (
+                <a href={s.href} aria-label={s.name} target="_blank" rel="noopener">
+                  <Icon name={s.icon} size={22} />
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+
+      <form class="form" id="contactForm">
+        <input type="hidden" name="access_key" value={site.web3formsKey} />
+        <input type="hidden" name="subject" value="New enquiry from BLACKCLAP website" />
+        <input type="hidden" name="from_name" value="BLACKCLAP Website" />
+        <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" />
+
+        <div class="row">
+          <label>
+            <span>Your name *</span>
+            <input type="text" name="name" required autocomplete="name" />
+          </label>
+          <label>
+            <span>Email *</span>
+            <input type="email" name="email" required autocomplete="email" />
+          </label>
+        </div>
+
+        <div class="row">
+          <label>
+            <span>Phone</span>
+            <input type="tel" name="phone" autocomplete="tel" />
+          </label>
+          <label>
+            <span>Enquiry type</span>
+            <select name="enquiry_type">
+              {topics.map((t) => <option value={t}>{t}</option>)}
+            </select>
+          </label>
+        </div>
+
+        <label>
+          <span>Message *</span>
+          <textarea name="message" rows="6" required></textarea>
+        </label>
+
+        <button type="submit" class="btn send">Send Message <span>→</span></button>
+        <p class="status" id="formStatus" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 70px;
+    align-items: start;
+  }
+
+  .details {
+    list-style: none;
+    margin: 10px 0 30px;
+  }
+
+  .details li {
+    padding: 18px 0;
+    border-bottom: 1px solid #1d1d1d;
+  }
+
+  .lbl {
+    display: block;
+    font-family: var(--font-label);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.75rem;
+    color: var(--yellow);
+    margin-bottom: 4px;
+  }
+
+  .details a,
+  .details p {
+    font-size: 1.2rem;
+    color: #fff;
+  }
+
+  .details a:hover {
+    color: var(--yellow);
+  }
+
+  .socials {
+    margin-top: 34px;
+  }
+
+  .icons {
+    display: flex;
+    gap: 18px;
+    color: var(--yellow);
+  }
+
+  .form {
+    border: 1px solid var(--line);
+    background: #080808;
+    padding: 38px;
+    display: grid;
+    gap: 20px;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  label span {
+    display: block;
+    font-family: var(--font-label);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 0.75rem;
+    color: var(--yellow);
+    margin-bottom: 6px;
+  }
+
+  input,
+  select,
+  textarea {
+    width: 100%;
+    background: #000;
+    border: 1px solid var(--line);
+    color: #fff;
+    padding: 13px 14px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+
+  input:focus,
+  select:focus,
+  textarea:focus {
+    border-color: var(--yellow);
+  }
+
+  textarea {
+    resize: vertical;
+  }
+
+  .hp {
+    display: none;
+  }
+
+  .send {
+    justify-self: start;
+  }
+
+  .send:disabled {
+    opacity: 0.6;
+    cursor: wait;
+  }
+
+  .status {
+    min-height: 1.5em;
+    font-size: 1rem;
+    color: var(--yellow);
+  }
+
+  .status.error {
+    color: #ff7a7a;
+  }
+
+  @media (max-width: 900px) {
+    .grid {
+      grid-template-columns: 1fr;
+      gap: 44px;
+    }
+
+    .row {
+      grid-template-columns: 1fr;
+    }
+
+    .form {
+      padding: 24px;
+    }
+  }
+</style>
+
+<script>
+  const form = document.getElementById('contactForm') as HTMLFormElement | null;
+  const status = document.getElementById('formStatus');
+  const button = form?.querySelector('button[type="submit"]') as HTMLButtonElement | null;
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!status || !button) return;
+
+    const data = new FormData(form);
+    const key = String(data.get('access_key') || '');
+
+    status.className = 'status';
+
+    if (!key || key.startsWith('YOUR_')) {
+      status.classList.add('error');
+      status.textContent = 'The contact form is not active yet. Please contact us by email or WhatsApp.';
+      return;
+    }
+
+    button.disabled = true;
+    status.textContent = 'Sending…';
+
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(Object.fromEntries(data)),
+      });
+      const json = await res.json();
+
+      if (json.success) {
+        status.textContent = 'Thank you! Your message has been sent. We will get back to you soon.';
+        form.reset();
+      } else {
+        status.classList.add('error');
+        status.textContent = 'Something went wrong. Please try again, or contact us directly.';
+      }
+    } catch {
+      status.classList.add('error');
+      status.textContent = 'Network error. Please check your connection and try again.';
+    } finally {
+      button.disabled = false;
+    }
+  });
+</script>
