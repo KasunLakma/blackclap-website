@@ -27,9 +27,9 @@ export const site = {
 
     // Links ලැබුනාම '#' වෙනුවට සැබෑ link දාන්න
     socials: [
-        { name: 'YouTube', icon: 'simple-icons:youtube', href: '#' },
-        { name: 'Instagram', icon: 'simple-icons:instagram', href: '#' },
-        { name: 'Facebook', icon: 'simple-icons:facebook', href: '#' },
-        { name: 'Vimeo', icon: 'simple-icons:vimeo', href: '#' },
+        { name: 'YouTube', icon: 'simple-icons:youtube', href: 'https://youtube.com/@blackclapentertainment5890' },
+        { name: 'Instagram', icon: 'simple-icons:instagram', href: '' },
+        { name: 'Facebook', icon: 'simple-icons:facebook', href: 'https://www.facebook.com/share/1LuStkibJD/' },
+        { name: 'Vimeo', icon: 'simple-icons:vimeo', href: '' },
     ],
 };

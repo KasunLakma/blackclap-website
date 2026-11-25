@@ -6,7 +6,7 @@
         "category": "English Physical Play / Monodrama",
         "tagline": "A Journey Beyond Limits",
         "featured": true,
-        "poster": "/images/the-swing-03.jpg",
+        "poster": "/images/posters/the-swing.jpg",
         "synopsis": "",
         "video": "",
         "gallery": [
@@ -169,7 +169,7 @@
         "category": "Sinhala Monodrama",
         "tagline": "",
         "featured": false,
-        "poster": "",
+        "poster": "/images/posters/the-bride.jpg",
         "synopsis": "",
         "video": "",
         "gallery": [],

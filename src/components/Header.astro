@@ -28,11 +28,13 @@ const isActive = (link: { href: string; also?: string[] }) =>
     </nav>
 
     <div class="socials">
-      {site.socials.map((s) => (
-        <a href={s.href} aria-label={s.name} target="_blank" rel="noopener">
-          <Icon name={s.icon} size={20} />
-        </a>
-      ))}
+      {site.socials
+        .filter((s) => s.href)
+        .map((s) => (
+          <a href={s.href} aria-label={s.name} target="_blank" rel="noopener">
+            <Icon name={s.icon} size={20} />
+          </a>
+        ))}
     </div>
 
     <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
