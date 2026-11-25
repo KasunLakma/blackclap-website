@@ -1,6 +1,6 @@
 ---
-import { Icon } from "astro-icon/components";
-import { site } from "../data/site.js";
+import { Icon } from 'astro-icon/components';
+import { site } from '../data/site.js';
 
 const year = new Date().getFullYear();
 const accessKey = site.web3formsKey;
@@ -9,41 +9,23 @@ const accessKey = site.web3formsKey;
 <footer class="site-footer">
   <div class="footer-band">
     <a href="/" class="brand-block">
-      <span class="b-main">{site.name}</span>
-      <span class="b-sub">{site.subtitle}</span>
+      <span class="stack">
+        <span class="b-main">{site.name}</span>
+        <span class="b-sub">{site.subtitle}</span>
+      </span>
     </a>
 
-    <p class="motto">
-      Create <i>•</i> Perform <i>•</i> Inspire
-    </p>
+    <p class="motto">Create <i>•</i> Perform <i>•</i> Inspire</p>
 
     <form class="newsletter" id="newsletterForm">
       <input type="hidden" name="access_key" value={accessKey} />
-      <input
-        type="hidden"
-        name="subject"
-        value="New subscriber from BLACKCLAP website"
-      />
+      <input type="hidden" name="subject" value="New subscriber from BLACKCLAP website" />
       <input type="hidden" name="from_name" value="BLACKCLAP Website" />
-      <input
-        type="checkbox"
-        name="botcheck"
-        class="hp"
-        tabindex="-1"
-        autocomplete="off"
-      />
+      <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" />
       <label for="email">Join Our Creative Journey</label>
       <div class="field">
-        <input
-          id="email"
-          name="email"
-          type="email"
-          placeholder="Your Email Address"
-          required
-        />
-        <button type="submit" aria-label="Subscribe">
-          →
-        </button>
+        <input id="email" name="email" type="email" placeholder="Your Email Address" required />
+        <button type="submit" aria-label="Subscribe">→</button>
       </div>
       <p class="nl-msg" id="nlMsg" role="status"></p>
     </form>
@@ -52,9 +34,7 @@ const accessKey = site.web3formsKey;
   <div class="footer-bottom">
     <div class="container bottom-inner">
       <div class="legal">
-        <p>
-          © {year} {site.fullName}. All Rights Reserved.
-        </p>
+        <p>© {year} {site.fullName}. All Rights Reserved.</p>
         <nav class="flinks">
           <a href="/gallery">Gallery</a>
           <a href="/news">News</a>
@@ -63,13 +43,11 @@ const accessKey = site.web3formsKey;
         </nav>
       </div>
       <div class="socials">
-        {site.socials
-          .filter((s) => s.href)
-          .map((s) => (
-            <a href={s.href} aria-label={s.name} target="_blank" rel="noopener">
-              <Icon name={s.icon} size={20} />
-            </a>
-          ))}
+        {site.socials.filter((s) => s.href).map((s) => (
+          <a href={s.href} aria-label={s.name} target="_blank" rel="noopener">
+            <Icon name={s.icon} size={20} />
+          </a>
+        ))}
       </div>
     </div>
   </div>
@@ -93,10 +71,16 @@ const accessKey = site.web3formsKey;
     background: var(--yellow);
     color: #000;
     display: flex;
-    flex-direction: column;
-    line-height: 1;
+    align-items: center;
     padding: 34px 70px 34px 40px;
     clip-path: polygon(0 0, 92% 0, 100% 100%, 0 100%);
+  }
+
+  /* නම් දෙකම එකම පළලේ තියන්න, block එකේ සම්පූර්ණ පළලට විසිරෙන්නේ නැතුව */
+  .stack {
+    display: inline-flex;
+    flex-direction: column;
+    line-height: 1;
   }
 
   .b-main {
@@ -178,22 +162,6 @@ const accessKey = site.web3formsKey;
     color: var(--yellow);
   }
 
-  @media (max-width: 900px) {
-    .footer-band {
-      grid-template-columns: 1fr;
-      gap: 28px;
-      padding-bottom: 32px;
-    }
-
-    .brand-block {
-      clip-path: none;
-      padding: 28px;
-    }
-
-    .newsletter {
-      padding: 0 28px;
-    }
-  }
   .legal {
     display: flex;
     flex-direction: column;
@@ -217,6 +185,7 @@ const accessKey = site.web3formsKey;
   .flinks a:hover {
     color: #fff;
   }
+
   .hp {
     display: none;
   }
@@ -227,46 +196,64 @@ const accessKey = site.web3formsKey;
     font-size: 0.85rem;
     color: var(--yellow);
   }
-</style>
-<script>
-  const form = document.getElementById(
-    "newsletterForm",
-  ) as HTMLFormElement | null;
-  const msg = document.getElementById("nlMsg");
 
-  form?.addEventListener("submit", async (e) => {
+  @media (max-width: 900px) {
+    .footer-band {
+      grid-template-columns: 1fr;
+      gap: 28px;
+      padding-bottom: 32px;
+    }
+
+    .brand-block {
+      clip-path: none;
+      padding: 28px;
+    }
+
+    .motto {
+      letter-spacing: 4px;
+      font-size: 0.9rem;
+    }
+
+    .newsletter {
+      padding: 0 28px;
+    }
+  }
+</style>
+
+<script>
+  const form = document.getElementById('newsletterForm') as HTMLFormElement | null;
+  const msg = document.getElementById('nlMsg');
+
+  form?.addEventListener('submit', async (e) => {
     e.preventDefault();
     if (!msg) return;
 
     const data = new FormData(form);
-    const key = String(data.get("access_key") || "");
+    const key = String(data.get('access_key') || '');
 
-    if (!key || key.startsWith("YOUR_")) {
-      msg.textContent = "This form is not active yet.";
+    if (!key || key.startsWith('YOUR_')) {
+      msg.textContent = 'This form is not active yet.';
       return;
     }
 
-    msg.textContent = "Sending…";
+    msg.textContent = 'Sending…';
 
     try {
-      const res = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify(Object.fromEntries(data)),
       });
       const json = await res.json();
 
       if (json.success) {
-        msg.textContent = "Thank you for joining!";
+        msg.textContent = 'Thank you for joining!';
         form.reset();
       } else {
-        msg.textContent = "Something went wrong. Please try again.";
+        msg.textContent = 'Something went wrong. Please try again.';
       }
     } catch {
-      msg.textContent = "Network error. Please try again.";
+      msg.textContent = 'Network error. Please try again.';
     }
   });
 </script>
