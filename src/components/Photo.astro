@@ -1,15 +1,16 @@
 ---
 const {
-  src = "",
-  alt = "",
-  shade = "none",
-  position = "center",
+  src = '',
+  alt = '',
+  shade = 'none',
+  position = 'center',
   duotone = false,
+  fit = 'cover', // 'contain' දුන්නොත් ඡායාරූපය කැපෙන්නේ නැතුව සම්පූර්ණයෙන් පෙන්වනවා
 } = Astro.props;
 ---
 
 <div
-  class:list={["photo", { empty: !src, duotone }]}
+  class:list={['photo', { empty: !src, duotone }]}
   style={`--shade:${shade}`}
 >
   {src && (
@@ -17,7 +18,7 @@ const {
       src={src}
       alt={alt}
       loading="lazy"
-      style={`object-position:${position}`}
+      style={`object-position:${position};object-fit:${fit}`}
     />
   )}
 </div>
@@ -37,13 +38,12 @@ const {
     object-fit: cover;
   }
 
-  /* duotone ඕනේ නම් විතරක් (duotone prop එක දුන්නොත්) */
   .photo.duotone img {
     filter: grayscale(1) contrast(1.15) brightness(0.85);
   }
 
   .photo.duotone::before {
-    content: "";
+    content: '';
     position: absolute;
     inset: 0;
     z-index: 1;
@@ -52,22 +52,16 @@ const {
     opacity: 0.65;
   }
 
-  /* අකුරු පැහැදිලිව පෙනෙන්න අඳුරු gradient එක */
   .photo::after {
-    content: "";
+    content: '';
     position: absolute;
     inset: 0;
     z-index: 2;
     background: var(--shade);
   }
 
-  /* ඡායාරූපය නැති වෙලාවට පෙනෙන glow එක */
   .photo.empty {
-    background: radial-gradient(
-      circle at 70% 45%,
-      rgba(255, 212, 0, 0.5),
-      rgba(255, 212, 0, 0.1) 40%,
-      #000 75%
-    );
+    background:
+      radial-gradient(circle at 70% 45%, rgba(255, 212, 0, 0.5), rgba(255, 212, 0, 0.1) 40%, #000 75%);
   }
 </style>

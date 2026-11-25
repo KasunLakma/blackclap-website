@@ -7,19 +7,17 @@ const wins = (item.awards || []).filter((a) => a.type === 'win').length;
 
 <a href={`${base}/${item.slug}`} class="card">
   <div class="poster">
-    <Photo
-      src={item.poster}
-      alt={item.title}
-      shade="linear-gradient(0deg, rgba(0,0,0,0.85), transparent 55%)"
-    />
+    <Photo src={item.poster} alt={`${item.title} poster`} fit="contain" />
     {!item.poster && <span class="ph">{item.title}</span>}
-    <span class="year">{item.year}</span>
-    {wins > 0 && <span class="wins">★ {wins} {wins === 1 ? 'Award' : 'Awards'}</span>}
   </div>
 
   <div class="info">
+    <p class="meta">
+      <span>{item.year}</span>
+      {wins > 0 && <span class="wins">★ {wins} {wins === 1 ? 'Award' : 'Awards'}</span>}
+    </p>
     <h3>{item.title}</h3>
-    <p>{item.category}</p>
+    <p class="cat">{item.category}</p>
   </div>
 </a>
 
@@ -38,8 +36,9 @@ const wins = (item.awards || []).filter((a) => a.type === 'win').length;
 
   .poster {
     position: relative;
-    aspect-ratio: 2 / 3;
+    aspect-ratio: 3 / 4;
     overflow: hidden;
+    border-bottom: 1px solid var(--line);
   }
 
   .ph {
@@ -57,35 +56,24 @@ const wins = (item.awards || []).filter((a) => a.type === 'win').length;
     line-height: 1;
   }
 
-  .year,
-  .wins {
-    position: absolute;
-    z-index: 4;
-    font-family: var(--font-label);
-    font-size: 0.78rem;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    padding: 4px 10px;
-  }
-
-  .year {
-    top: 12px;
-    left: 12px;
-    background: var(--yellow);
-    color: #000;
-    font-weight: 600;
-  }
-
-  .wins {
-    bottom: 12px;
-    left: 12px;
-    border: 1px solid var(--yellow);
-    color: var(--yellow);
-    background: rgba(0, 0, 0, 0.7);
-  }
-
   .info {
-    padding: 16px 18px 20px;
+    padding: 14px 18px 20px;
+  }
+
+  .meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-label);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 0.78rem;
+    color: var(--yellow);
+  }
+
+  .wins {
+    border: 1px solid var(--yellow);
+    padding: 1px 8px;
   }
 
   h3 {
@@ -93,13 +81,14 @@ const wins = (item.awards || []).filter((a) => a.type === 'win').length;
     font-size: 1.7rem;
     line-height: 1;
     color: #fff;
+    margin-top: 8px;
   }
 
   .card:hover h3 {
     color: var(--yellow);
   }
 
-  p {
+  .cat {
     margin-top: 6px;
     font-size: 0.9rem;
     color: var(--muted);

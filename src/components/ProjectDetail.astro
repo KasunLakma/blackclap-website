@@ -24,11 +24,7 @@ const typeLabel = {
 <section class="top">
   <div class="container top-grid">
     <div class="poster">
-      <Photo
-        src={item.poster}
-        alt={item.title}
-        shade="linear-gradient(0deg, rgba(0,0,0,0.6), transparent 50%)"
-      />
+      <Photo src={item.poster} alt={`${item.title} poster`} fit="contain" />
       {!item.poster && <span class="ph">{item.title}</span>}
     </div>
 
@@ -163,7 +159,7 @@ const typeLabel = {
 
   .poster {
     position: relative;
-    aspect-ratio: 2 / 3;
+    aspect-ratio: 3 / 4;
     border: 1px solid var(--line);
     overflow: hidden;
   }
